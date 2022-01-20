@@ -9,11 +9,11 @@ import {
 import ListContainer from "./ListContainer";
 import { withAuthenticator } from "aws-amplify-react-native";
 
-const Dashboard = ({ route }) => {
-  console.log("Inside Dashboard " + route);
+const Dashboard = (props) => {
+  console.log("Inside Dashboard " + props.user);
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hello {route.params.code}!</Text>
+      <Text style={styles.text}>Hello {props.user.username}!</Text>
       <ListContainer />
       <TouchableHighlight
         style={styles.addButton}

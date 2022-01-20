@@ -8,13 +8,18 @@ import Amplify, { Auth } from "aws-amplify";
 import awsconfig from "./src/aws-exports";
 import Login from "./components/Login";
 import * as Linking from "expo-linking";
-Amplify.configure(awsconfig);
+Amplify.configure({
+  ...awsconfig,
+  Analytics: {
+    disabled: true,
+  },
+});
 
 const prefix = Linking.createURL("/");
 const config = {
   screens: {
     Dashboard: "loginCallback",
-    NotFound: '*',
+    NotFound: "*",
   },
 };
 
