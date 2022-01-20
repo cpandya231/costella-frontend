@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-
+import { StyleSheet, Text, View,FlatList } from "react-native";
+import ItemCategory from "./ItemCategory";
 export default function Item(props) {
+  console.log(props);
   return (
     <View style={styles.item}>
       <View style={styles.itemDetail}>
-        <Text>{props.name}</Text>
+        <Text style={{fontWeight:"bold"}}>{props.name}</Text>
+        <FlatList style={styles.catagoryList} data={props.catagory} renderItem={({ item }) => <ItemCategory name={item} />} />
       </View>
 
-      <Text style={styles.itemAmount}>{props.amount}</Text>
+      <Text style={styles.itemAmount}>{'\u20B9'}{props.amount}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   item: {
-    height: 50,
+    height: 80,
     padding: 10,
     margin: 10,
     borderWidth: 1,
@@ -25,10 +27,16 @@ const styles = StyleSheet.create({
   },
   itemDetail: {
     flex: 1,
+    justifyContent:"space-between",
   },
   itemAmount: {
     color: "red",
 
-    width: 20,
+    width: 30,
   },
+  catagoryList:{
+    width:"40%",
+    flexDirection:"row",
+    justifyContent:"space-between"
+  }
 });

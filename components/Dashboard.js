@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,Button,Image,TouchableHighlight } from "react-native";
 import ListContainer from "./ListContainer";
 
 export default function Dashboard() {
@@ -6,6 +6,10 @@ export default function Dashboard() {
     <View style={styles.container}>
       <Text style={styles.text}>Hello Chintan!</Text>
       <ListContainer />
+      <TouchableHighlight style={styles.addButton}  onPress={()=>console.log("Pressed")}>
+      <Image source={require('../assets/icons8-add-100.png')} style={{height:80,
+      width:80}} />
+      </TouchableHighlight>
     </View>
   );
 }
@@ -23,4 +27,9 @@ const styles = StyleSheet.create({
     textAlign: "left",
     padding: 9,
   },
+  addButton:{
+    position:"absolute",
+    right:0,
+    bottom:0
+  }
 });
