@@ -1,6 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
-
-export default function Home() {
+import { StyleSheet, Text, View, Button } from "react-native";
+import * as React from "react";
+export default function Home({ navigation }) {
+  React.useEffect(() => {
+    setTimeout(() => navigation.navigate("Dashboard"), 2000);
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Hisab</Text>
