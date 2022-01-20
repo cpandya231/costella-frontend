@@ -7,7 +7,7 @@ export default function Login({ navigation }) {
 
   React.useEffect(async () => {
     const loggedInUser = await Auth.currentAuthenticatedUser();
-    console.log("User in login " + json.stringify(loggedInUser));
+  
     if (null == user) {
       setUser(loggedInUser);
     }

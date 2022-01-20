@@ -19,6 +19,7 @@ const prefix = Linking.createURL("/");
 const config = {
   screens: {
     Dashboard: "loginCallback",
+    Login: "logoutCallback",
     NotFound: "*",
   },
 };

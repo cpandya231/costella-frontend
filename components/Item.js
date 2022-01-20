@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View,FlatList } from "react-native";
 import ItemCategory from "./ItemCategory";
 export default function Item(props) {
-  console.log(props);
+  
   return (
     <View style={styles.item}>
       <View style={styles.itemDetail}>
         <Text style={{fontWeight:"bold"}}>{props.name}</Text>
-        <FlatList style={styles.catagoryList} data={props.catagory} renderItem={({ item }) => <ItemCategory name={item} />} />
+        <FlatList style={styles.catagoryList} data={props.catagory} 
+        renderItem={({ item }) => <ItemCategory name={item} />}
+        keyExtractor={(item, index) => index.toString()}
+        />
       </View>
 
       <Text style={styles.itemAmount}>{'\u20B9'}{props.amount}</Text>

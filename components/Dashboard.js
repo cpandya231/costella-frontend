@@ -8,12 +8,13 @@ import {
 } from "react-native";
 import ListContainer from "./ListContainer";
 import { withAuthenticator } from "aws-amplify-react-native";
+import Auth from "@aws-amplify/auth";
 
 const Dashboard = (props) => {
-  console.log("Inside Dashboard " + props.user);
+  console.log("Inside Dashboard "+JSON.stringify(props.user.signInUserSession.accessToken.jwtToken));
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hello {props.user.username}!</Text>
+      <Text style={styles.text}>Hello {props.user.attributes.email}!</Text>
       <ListContainer />
       <TouchableHighlight
         style={styles.addButton}
@@ -24,6 +25,7 @@ const Dashboard = (props) => {
           style={{ height: 80, width: 80 }}
         />
       </TouchableHighlight>
+      <Button onPress={()=>Auth.signOut()} title="Logout"/>
     </View>
   );
 };
