@@ -9,7 +9,7 @@ export default function ListContainer() {
   
   return (
     <View style={styles.listContainer}>
-      <FlatList data={data} renderItem={({ item }) => <Item {...item} />} />
+      <FlatList style={styles.flatListContainer} data={data} renderItem={({ item }) => <Item {...item} />} />
     </View>
   );
 }
@@ -17,7 +17,10 @@ export default function ListContainer() {
 const styles = StyleSheet.create({
   listContainer: {
     flex: 10,
-    
+    backgroundColor: "#FFFDDE",
     
   },
+  flatListContainer:{
+    marginTop:10
+  }
 });

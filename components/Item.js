@@ -19,11 +19,13 @@ const styles = StyleSheet.create({
   item: {
     height: 80,
     padding: 10,
-    margin: 10,
-    borderWidth: 1,
+    marginBottom: 10,
+    
+    
     borderRadius: 2,
     flexDirection: "row",
     justifyContent: "space-evenly",
+    backgroundColor:"#FFF"
   },
   itemDetail: {
     flex: 1,

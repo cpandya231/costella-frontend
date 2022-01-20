@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View, Button } from "react-native";
 import * as React from "react";
-export default function Home({ navigation }) {
-  React.useEffect(() => {
-    setTimeout(() => navigation.navigate("Login"), 2000);
-  }, [navigation]);
+import Amplify, { Auth, Hub } from "aws-amplify";
+export default function Login({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hisab</Text>
+      <Button
+        onPress={() => Auth.federatedSignIn({ provider: "Google" })}
+        title="Open Google"
+      ></Button>
     </View>
   );
 }
@@ -14,12 +15,8 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFC900",
+    backgroundColor: "#FFF",
     alignItems: "center",
     justifyContent: "center",
-  },
-  text: {
-    fontSize: 32,
-    height: 150,
   },
 });

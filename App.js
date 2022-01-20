@@ -4,12 +4,30 @@ import { StyleSheet, Text, View } from "react-native";
 import Home from "./components/Home";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./components/Dashboard";
+import Amplify, { Auth } from "aws-amplify";
+import awsconfig from "./src/aws-exports";
+import Login from "./components/Login";
+import * as Linking from "expo-linking";
+Amplify.configure(awsconfig);
+
+const prefix = Linking.createURL("/");
+const config = {
+  screens: {
+    Dashboard: "loginCallback",
+    NotFound: '*',
+  },
+};
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+const App = () => {
+  const linking = {
+    prefixes: [prefix],
+    config,
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
@@ -17,10 +35,11 @@ export default function App() {
       >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -28,3 +47,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 });
+
+export default App;

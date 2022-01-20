@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-hisab-dev-114354-authRole",
+      "UnauthRoleArn": "arn:aws:iam::899297994168:role/amplify-hisab-dev-114354-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::899297994168:role/amplify-hisab-dev-114354-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-hisab-dev-114354-deployment",
+      "UnauthRoleName": "amplify-hisab-dev-114354-unauthRole",
+      "StackName": "amplify-hisab-dev-114354",
+      "StackId": "arn:aws:cloudformation:eu-west-1:899297994168:stack/amplify-hisab-dev-114354/29eeb690-7501-11ec-bd08-022fbcf493e1",
+      "AmplifyAppId": "d1ptmka4bl7znt"
+    },
+    "categories": {
+      "auth": {
+        "hisab34e13e49": {}
+      }
+    }
+  }
+}
