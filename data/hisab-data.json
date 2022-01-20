@@ -1,0 +1,35 @@
+[
+    {
+        "name":"Orange",
+        "amount":80,
+        "catagory":[
+            "Fruit",
+            "Grocery"
+        ],
+        "purchaseDate":"07/01/2022"
+    },
+    {
+        "name":"Milk",
+        "amount":90,
+        "catagory":[
+            "Grocery"
+        ],
+        "purchaseDate":"07/01/2022"
+    },
+    {
+        "name":"Momos",
+        "amount":50,
+        "catagory":[
+           "Food"
+        ],
+        "purchaseDate":"05/01/2022"
+    },
+    {
+        "name":"Ringan",
+        "amount":30,
+        "catagory":[
+            "Vegetables"
+        ],
+        "purchaseDate":"05/01/2022"
+    }
+]
