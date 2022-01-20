@@ -1,12 +1,9 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import Home from "./Home";
 
-export default function App() {
+export default function Home() {
   return (
     <View style={styles.container}>
-      <Home />
-      <StatusBar style="auto" />
+      <Text style={styles.text}>Hisab</Text>
     </View>
   );
 }
@@ -14,8 +11,13 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFC900",
     alignItems: "center",
     justifyContent: "center",
+  },
+  text: {
+    height: 100,
+
+    fontSize: 40,
   },
 });
