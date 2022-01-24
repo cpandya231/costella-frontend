@@ -2,12 +2,13 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import * as React from "react";
 import Amplify, { Auth, Hub } from "aws-amplify";
 import Dashboard from "./Dashboard";
+import Group from "./Group";
 export default function Login({ navigation }) {
   const [user, setUser] = React.useState(null);
 
   React.useEffect(async () => {
     const loggedInUser = await Auth.currentAuthenticatedUser();
-  
+
     if (null == user) {
       setUser(loggedInUser);
     }
@@ -28,7 +29,7 @@ export default function Login({ navigation }) {
       </View>
     );
   } else {
-    return <Dashboard user={user} />;
+    return <Group user={user} />;
   }
 }
 

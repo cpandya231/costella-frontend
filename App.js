@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import Home from "./components/Home";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./components/Dashboard";
+import Group from "./components/Group";
 import Amplify, { Auth } from "aws-amplify";
 import awsconfig from "./src/aws-exports";
 import Login from "./components/Login";
@@ -18,7 +19,7 @@ Amplify.configure({
 const prefix = Linking.createURL("/");
 const config = {
   screens: {
-    Dashboard: "loginCallback",
+    Group: "loginCallback",
     Login: "logoutCallback",
     NotFound: "*",
   },
@@ -39,7 +40,9 @@ const App = () => {
           headerShown: false,
         }}
       >
+
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Group" component={Group} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>

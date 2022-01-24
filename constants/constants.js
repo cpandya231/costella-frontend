@@ -1,0 +1,1 @@
+export const BASE_URL='https://fwwxu02uof.execute-api.eu-west-1.amazonaws.com/dev/hisab/'
