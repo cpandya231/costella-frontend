@@ -4,7 +4,7 @@ import GroupItem from "./GroupItem";
 
 export default function GroupList(props) {
 
-  console.log("Inside GroupList, data" + props.data)
+  console.log("Inside GroupList, data" + JSON.stringify(props.data));
   return (
 
     <View style={styles.listContainer}>

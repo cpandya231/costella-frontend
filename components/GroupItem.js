@@ -1,33 +1,20 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import * as groupService from '../services/GroupService'
 export default function GroupItem(props) {
-  const url = constants.BASE_URL + 'group/item' + props.groupId;
 
+  console.log("Inside GroupItem " + JSON.stringify(props));
   const getItems = async () => {
-    try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: JWT_TOKEN
-        }
-      });
-      console.log('Got response from Items api ' + JSON.stringify(response));
-      if (response.status == 200) {
-        const itemData = await response.json();
+    console.log("Calling getItems");
+    let groupItems = await groupService.getGroupItem(props.groupId);
+    props.navigation.navigate("Dashboard", groupItems);
 
-      } else {
-        console.error(response.status);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-
-    }
   }
   return (
     <View style={styles.item}>
       <TouchableHighlight
         onPress={() => getItems()}
+        style={styles.itemDetail}
       >
         <View style={styles.itemDetail}>
           <Text style={{ fontWeight: "bold", fontSize: 16 }}>{props.groupName}</Text>

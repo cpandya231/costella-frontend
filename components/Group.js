@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import * as constants from '../constants/constants';
+import * as groupService from '../services/GroupService'
 import GroupList from "./GroupList";
 import { withAuthenticator } from "aws-amplify-react-native";
 
@@ -11,26 +11,12 @@ const Group = (props) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState(null);
 
-  const url = constants.BASE_URL + 'group/' + props.user.username;
-  const JWT_TOKEN = props.user.signInUserSession.accessToken.jwtToken;
-
   const getGroups = async () => {
     try {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          Authorization: JWT_TOKEN
-        }
-      });
-      console.log('Got response from Groups api ' + JSON.stringify(response));
-      if (response.status == 200) {
-        const groupData = await response.json();
-        setData(groupData);
-        setLoading(false);
-      } else {
-        console.error(response.status);
-      }
 
+      let groupData = await groupService.getGroups(props.user.username);
+      setData(groupData);
+      setLoading(false);
 
     } catch (error) {
       console.error(error);
