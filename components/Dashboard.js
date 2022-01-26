@@ -1,31 +1,24 @@
 import {
   StyleSheet,
-  Text,
   View,
-  Button,
-  Image,
-  TouchableHighlight,
+
 } from "react-native";
 import ListContainer from "./ListContainer";
-import { withAuthenticator } from "aws-amplify-react-native";
-import Auth from "@aws-amplify/auth";
+import AddButton from "./AddButton";
+import * as groupService from "../services/GroupService"
+import { useNavigation } from '@react-navigation/native';
 
-const Dashboard = ({ props, route }) => {
-  console.log("Inside Dashboard ");
+const Dashboard = ({route}) => {
+  let navigation=useNavigation();
+  console.log("Inside Dashboard "+JSON.stringify(route));
+
+
   return (
     <View style={styles.container}>
 
       <ListContainer data={route.params} />
-      <TouchableHighlight
-        style={styles.addButton}
-        onPress={() => console.log("Pressed")}
-      >
-        <Image
-          source={require("../assets/icons8-add-100.png")}
-          style={{ height: 80, width: 80 }}
-        />
-      </TouchableHighlight>
-      <Button onPress={() => Auth.signOut()} title="Logout" />
+      <AddButton onPress={()=>console.log("Add button pressed")}/>
+      
     </View>
   );
 };
@@ -43,11 +36,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     padding: 9,
   },
-  addButton: {
-    position: "absolute",
-    right: 0,
-    bottom: 0,
-  },
+  
 });
 
-export default withAuthenticator(Dashboard);
+export default Dashboard;

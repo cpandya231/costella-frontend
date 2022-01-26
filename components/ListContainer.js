@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import Item from "./Item";
 
-export default function ListContainer({ props }) {
+export default function ListContainer( props ) {
   console.log("Inside ListContainer")
   const customData = props.data;
 

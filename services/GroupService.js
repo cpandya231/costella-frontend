@@ -51,6 +51,30 @@ export const getGroupItem = async (groupId) => {
 
 }
 
+export const addGroupItem = async (body) => {
+    console.log("Adding item to using "+JSON.stringify(body));
+    const JWT_TOKEN = await getAccessJwtToken();
+    let itemUrl = url + 'item/';
+
+    const response = await fetch(itemUrl, {
+        method: 'POST',
+        headers: {
+            Authorization: JWT_TOKEN,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    });
+    if (response.status == 200) {
+        const itemData = await response.json();
+        console.log('Got response from Items api after adding item  ' + JSON.stringify(itemData));
+        return itemData;
+    } else {
+        console.error(response.status);
+        return null;
+    }
+
+}
+
 const getAccessJwtToken = async () => {
     // Auth.currentSession() checks if token is expired and refreshes with Cognito if needed automatically
     const session = await Auth.currentSession();
