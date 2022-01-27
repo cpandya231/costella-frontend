@@ -32,7 +32,7 @@ const Dashboard = ({ route }) => {
   }
 
   const addHisab = () => {
-    console.log("Add button pressed");
+
     navigation.navigate("AddHisabForm", { "groupId": route.params.groupId, "groupItems": data });
 
   }
