@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 import * as groupService from '../services/GroupService'
 import { useNavigation } from '@react-navigation/native';
 
-const GroupItem=(props)=> {
-   let navigation=useNavigation();
+const GroupItem = (props) => {
+  let navigation = useNavigation();
   console.log("Inside GroupItem " + JSON.stringify(props));
   const getItems = async () => {
     console.log("Calling getItems");
-    let groupItems = await groupService.getGroupItem(props.groupId);
- 
-    navigation.navigate("Dashboard", groupItems);
+
+
+    navigation.navigate("Dashboard", { "groupId": props.groupId });
 
   }
   return (
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default GroupItem; 
+export default GroupItem;

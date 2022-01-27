@@ -52,10 +52,10 @@ export const getGroupItem = async (groupId) => {
 }
 
 export const addGroupItem = async (body) => {
-    console.log("Adding item to using "+JSON.stringify(body));
+    console.log("Adding item to using " + JSON.stringify(body));
     const JWT_TOKEN = await getAccessJwtToken();
-    let itemUrl = url + 'item/';
-
+    let itemUrl = url + 'item';
+    console.log("Item url " + itemUrl);
     const response = await fetch(itemUrl, {
         method: 'POST',
         headers: {
@@ -64,6 +64,7 @@ export const addGroupItem = async (body) => {
         },
         body: JSON.stringify(body)
     });
+    console.log('Entire response after adding item  ' + JSON.stringify(response));
     if (response.status == 200) {
         const itemData = await response.json();
         console.log('Got response from Items api after adding item  ' + JSON.stringify(itemData));
