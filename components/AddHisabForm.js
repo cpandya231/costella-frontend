@@ -21,7 +21,9 @@ export default function AddHisabForm({ route }) {
         data['category'] = ["Grocery"];
         data['purchaseDate'] = "27/01/2022";
         let addItemResponse = await groupService.addGroupItem(data);
-        navigation.navigate("Dashboard", { "groupId": route.params.groupId });
+        let groupItems = route.params.groupItems;
+        groupItems.push(data);
+        navigation.navigate("Dashboard", { "groupId": route.params.groupId, "groupItems": groupItems });
 
     }
 

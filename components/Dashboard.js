@@ -10,13 +10,13 @@ import AddButton from "./AddButton";
 import { useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from "react";
 import * as groupService from "../services/GroupService"
-import { useFocusEffect } from '@react-navigation/native';
+import Constants from 'expo-constants';
 
 const Dashboard = ({ route }) => {
   let navigation = useNavigation();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(route.params.groupItems);
   const [isLoading, setLoading] = useState(true);
-  console.log("Inside Dashboard " + JSON.stringify(route));
+
 
 
   useEffect(() => {
@@ -33,14 +33,14 @@ const Dashboard = ({ route }) => {
 
   const addHisab = () => {
     console.log("Add button pressed");
-    navigation.navigate("AddHisabForm", { "groupId": route.params.groupId });
+    navigation.navigate("AddHisabForm", { "groupId": route.params.groupId, "groupItems": data });
 
   }
 
   return (
 
     <>
-      {isLoading ? <Text>Loading Groups...</Text> :
+      {isLoading ? <Text>Loading items...</Text> :
         <View style={styles.container}>
           <ListContainer data={data} />
           <AddButton onPress={() => addHisab()} />
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF",
+    paddingTop: Constants.statusBarHeight,
   },
   text: {
     flex: 1,

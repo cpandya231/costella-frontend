@@ -39,10 +39,10 @@ export const getGroupItem = async (groupId) => {
             Authorization: JWT_TOKEN
         }
     });
-    console.log('Got response from Items api ' + JSON.stringify(response));
+
     if (response.status == 200) {
         const itemData = await response.json();
-        console.log('Item data from service ' + JSON.stringify(itemData));
+
         return itemData;
     } else {
         console.error(response.status);

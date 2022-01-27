@@ -10,7 +10,7 @@ const GroupItem = (props) => {
     console.log("Calling getItems");
 
 
-    navigation.navigate("Dashboard", { "groupId": props.groupId });
+    navigation.navigate("Dashboard", { "groupId": props.groupId, "groupItems": [] });
 
   }
   return (
