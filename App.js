@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import * as Linking from "expo-linking";
 import GroupItem from "./components/GroupItem";
 import AddHisabForm from "./components/AddHisabForm";
+import AddGroupForm from "./components/AddGroupForm";
 Amplify.configure({
   ...awsconfig,
   Analytics: {
@@ -47,6 +48,7 @@ const App = () => {
         <Stack.Screen name="Group" component={Group} />
         <Stack.Screen name="GroupItem" component={GroupItem} />
         <Stack.Screen name="AddHisabForm" component={AddHisabForm} />
+        <Stack.Screen name="AddGroupForm" component={AddGroupForm} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
 
         <Stack.Screen name="Login" component={Login} />

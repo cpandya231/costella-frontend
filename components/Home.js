@@ -6,7 +6,7 @@ export default function Home({ navigation }) {
   }, [navigation]);
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hisab</Text>
+      <Text style={styles.text}>Costella</Text>
     </View>
   );
 }

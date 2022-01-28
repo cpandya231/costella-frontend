@@ -2,19 +2,26 @@ import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import * as groupService from '../services/GroupService'
 import GroupList from "./GroupList";
-import { withAuthenticator } from "aws-amplify-react-native";
+import AddButton from "./AddButton";
+import { useNavigation } from '@react-navigation/native';
 
 const Group = (props) => {
-
-  console.log('Inside Group container ' + props.user.username);
+  let username = props.username;
+  let groups = [];
+  if (null != props.route) {
+    username = props.route.params.username;
+    groups = props.route.params.groups;
+  }
+  console.log('Inside Group container ');
 
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(groups);
+  let navigation = useNavigation();
 
   const getGroups = async () => {
     try {
 
-      let groupData = await groupService.getGroups(props.user.username);
+      let groupData = await groupService.getGroups(username);
       setData(groupData);
       setLoading(false);
 
@@ -25,18 +32,27 @@ const Group = (props) => {
     }
   }
 
+  const addGroup = () => {
+
+    navigation.navigate("AddGroupForm", { "username": username, "groups": data });
+
+  }
 
   useEffect(() => {
     getGroups();
   }, []);
 
   return (
+    <>
 
-    <View style={styles.listContainer}>
       {isLoading ? <Text>Loading Groups...</Text> :
-        <GroupList data={data} />
+        <View style={styles.listContainer}>
+          <GroupList data={data} />
+          <AddButton onPress={() => addGroup()} />
+        </View>
       }
-    </View>
+
+    </>
   );
 }
 
@@ -48,4 +64,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withAuthenticator(Group);
+export default Group;

@@ -29,7 +29,7 @@ export default function Login({ navigation }) {
       </View>
     );
   } else {
-    return <Group user={user} />;
+    return <Group username={user.username} />;
   }
 }
 

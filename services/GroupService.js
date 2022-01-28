@@ -25,6 +25,29 @@ export const getGroups = async (username) => {
         return null;
     }
 
+}
+
+export const addGroup = async (username, body) => {
+    console.log("Adding Group using " + JSON.stringify(body));
+    const JWT_TOKEN = await getAccessJwtToken();
+
+    const response = await fetch(url + username, {
+        method: 'POST',
+        headers: {
+            Authorization: JWT_TOKEN,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    });
+    console.log('Got response from Groups api ' + JSON.stringify(response));
+    if (response.status == 200) {
+        const groupData = await response.json();
+        console.log('Group data from service ' + JSON.stringify(groupData));
+        return groupData;
+    } else {
+        console.error("Error occured " + response.status);
+        return null;
+    }
 
 }
 
