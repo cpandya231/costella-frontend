@@ -65,7 +65,7 @@ export const getGroupItem = async (groupId) => {
 
     if (response.status == 200) {
         const itemData = await response.json();
-
+        console.log("Item data " + JSON.stringify(itemData));
         return itemData;
     } else {
         console.error(response.status);
