@@ -47,6 +47,7 @@ const Group = (props) => {
 
       {isLoading ? <Text>Loading Groups...</Text> :
         <View style={styles.listContainer}>
+          
           <GroupList data={data} />
           <AddButton onPress={() => addGroup()} />
         </View>
@@ -59,7 +60,7 @@ const Group = (props) => {
 const styles = StyleSheet.create({
   listContainer: {
     flex: 5,
-    backgroundColor: "#FFFDDE",
+    backgroundColor: "#f8f8f8",
 
   }
 });

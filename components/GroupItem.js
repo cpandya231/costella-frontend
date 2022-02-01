@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+
 import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
-import * as groupService from '../services/GroupService'
+
 import { useNavigation } from '@react-navigation/native';
+import GeneralStyles from '../styles/GeneralStyles';
 
 const GroupItem = (props) => {
+
   let navigation = useNavigation();
   console.log("Inside GroupItem " + JSON.stringify(props));
   const getItems = async () => {
     console.log("Calling getItems");
 
 
-    navigation.navigate("Dashboard", { "groupId": props.groupId, "groupItems": [] });
+    navigation.navigate("Dashboard", { "groupId": props.groupId, "groupName": props.groupName, "groupItems": [] });
 
   }
   return (
@@ -28,17 +30,7 @@ const GroupItem = (props) => {
 }
 
 const styles = StyleSheet.create({
-  item: {
-    height: 80,
-    padding: 10,
-    marginBottom: 10,
-
-
-    borderRadius: 2,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    backgroundColor: "#FFF"
-  },
+  item: GeneralStyles.item,
   itemDetail: {
     flex: 1,
     justifyContent: "space-between",

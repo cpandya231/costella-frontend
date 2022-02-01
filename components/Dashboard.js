@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from "react";
 import * as groupService from "../services/GroupService"
 import Constants from 'expo-constants';
+import GeneralStyles from "../styles/GeneralStyles";
 
 const Dashboard = ({ route }) => {
   let navigation = useNavigation();
@@ -42,6 +43,7 @@ const Dashboard = ({ route }) => {
     <>
       {isLoading ? <Text>Loading items...</Text> :
         <View style={styles.container}>
+          <Text style={styles.h1}>{route.params.groupName}</Text>
           <ListContainer data={data} />
           <AddButton onPress={() => addHisab()} />
         </View>
@@ -51,19 +53,13 @@ const Dashboard = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
+  h1: GeneralStyles.h1,
   container: {
     flex: 1,
-    backgroundColor: "#FFF",
+    backgroundColor: "#f8f8f8",
     paddingTop: Constants.statusBarHeight,
   },
-  text: {
-    flex: 1,
-    fontSize: 32,
-    height: 150,
-    color: "#FFC900",
-    textAlign: "left",
-    padding: 9,
-  },
+
 
 });
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import ItemCategory from "./ItemCategory";
+import GeneralStyles from '../styles/GeneralStyles';
 export default function Item(props) {
 
   return (
@@ -19,17 +20,7 @@ export default function Item(props) {
 }
 
 const styles = StyleSheet.create({
-  item: {
-    height: 80,
-    padding: 10,
-    margin: 10,
-    borderRadius: 10,
-
-
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    backgroundColor: "#FFF"
-  },
+  item: GeneralStyles.item,
   itemDetail: {
     flex: 1,
     justifyContent: "space-between",

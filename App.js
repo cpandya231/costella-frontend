@@ -45,7 +45,7 @@ const App = () => {
       >
 
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Group" component={Group} />
+        <Stack.Screen name="Group" component={Group} options={{ title: 'My Groups' }} />
         <Stack.Screen name="GroupItem" component={GroupItem} />
         <Stack.Screen name="AddHisabForm" component={AddHisabForm} />
         <Stack.Screen name="AddGroupForm" component={AddGroupForm} />
