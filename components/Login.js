@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
 import * as React from "react";
-import Amplify, { Auth, Hub } from "aws-amplify";
-import Dashboard from "./Dashboard";
+import { Auth } from "aws-amplify";
+
 import Group from "./Group";
 export default function Login({ navigation }) {
   const [user, setUser] = React.useState(null);
