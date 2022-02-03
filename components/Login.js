@@ -2,7 +2,6 @@ import { StyleSheet, View, Button } from "react-native";
 import * as React from "react";
 import { Auth } from "aws-amplify";
 
-import Group from "./Group";
 export default function Login({ navigation }) {
 
   const [user, setUser] = React.useState(null);
@@ -11,14 +10,13 @@ export default function Login({ navigation }) {
     const loggedInUser = await Auth.currentAuthenticatedUser();
     if (null != loggedInUser) {
 
-      navigation.navigate("TabsScreen");
+      navigation.navigate("TabNavigator");
     }
   });
   const signIn = () => {
     Auth.federatedSignIn({ provider: "Google" })
       .then((loggedInUser) => {
-        setUser(loggedInUser);
-        console.log(user);
+        console.log(loggedInUser);
       })
       .catch((err) => console.log("Error occured while signing in " + err));
   };

@@ -15,7 +15,7 @@ export const getGroups = async (username) => {
             Authorization: JWT_TOKEN
         }
     });
-    console.log('Got response from Groups api ' + JSON.stringify(response));
+
     if (response.status == 200) {
         const groupData = await response.json();
         console.log('Group data from service ' + JSON.stringify(groupData));
@@ -39,7 +39,7 @@ export const addGroup = async (username, body) => {
         },
         body: JSON.stringify(body)
     });
-    console.log('Got response from Groups api ' + JSON.stringify(response));
+
     if (response.status == 200) {
         const groupData = await response.json();
         console.log('Group data from service ' + JSON.stringify(groupData));
@@ -87,7 +87,7 @@ export const addGroupItem = async (body) => {
         },
         body: JSON.stringify(body)
     });
-    console.log('Entire response after adding item  ' + JSON.stringify(response));
+
     if (response.status == 200) {
         const itemData = await response.json();
         console.log('Got response from Items api after adding item  ' + JSON.stringify(itemData));
