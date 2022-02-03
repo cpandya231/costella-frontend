@@ -4,13 +4,14 @@ import { Auth } from "aws-amplify";
 
 import Group from "./Group";
 export default function Login({ navigation }) {
+
   const [user, setUser] = React.useState(null);
 
   React.useEffect(async () => {
     const loggedInUser = await Auth.currentAuthenticatedUser();
+    if (null != loggedInUser) {
 
-    if (null == user) {
-      setUser(loggedInUser);
+      navigation.navigate("TabsScreen");
     }
   });
   const signIn = () => {
@@ -22,15 +23,14 @@ export default function Login({ navigation }) {
       .catch((err) => console.log("Error occured while signing in " + err));
   };
 
-  if (null == user) {
-    return (
-      <View style={styles.container}>
-        <Button onPress={() => signIn()} title="Open Google"></Button>
-      </View>
-    );
-  } else {
-    return <Group username={user.username} />;
-  }
+
+  return (
+
+    <View style={styles.container}>
+      <Button onPress={() => signIn()} title="Open Google"></Button>
+    </View>
+  );
+
 }
 
 const styles = StyleSheet.create({

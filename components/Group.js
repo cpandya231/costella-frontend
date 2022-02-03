@@ -4,11 +4,12 @@ import * as groupService from '../services/GroupService'
 import GroupList from "./GroupList";
 import AddButton from "./AddButton";
 import { useNavigation } from '@react-navigation/native';
+import { Auth } from "aws-amplify";
 
 const Group = (props) => {
   let username = props.username;
   let groups = [];
-  if (null != props.route) {
+  if (null != props.route.params) {
     username = props.route.params.username;
     groups = props.route.params.groups;
   }
@@ -20,7 +21,8 @@ const Group = (props) => {
 
   const getGroups = async () => {
     try {
-
+      const loggedInUser = await Auth.currentAuthenticatedUser();
+      username = loggedInUser.username;
       let groupData = await groupService.getGroups(username);
       setData(groupData);
       setLoading(false);
@@ -47,7 +49,7 @@ const Group = (props) => {
 
       {isLoading ? <Text>Loading Groups...</Text> :
         <View style={styles.listContainer}>
-          
+
           <GroupList data={data} />
           <AddButton onPress={() => addGroup()} />
         </View>

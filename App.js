@@ -36,7 +36,10 @@ const config = {
 const GroupStack = createNativeStackNavigator();
 
 function GroupStackScreen() {
-  return (<GroupStack.Navigator>
+
+  return (<GroupStack.Navigator screenOptions={{
+    headerShown: false,
+  }}>
 
 
     <GroupStack.Screen name="Group" component={Group} options={{ title: 'My Groups' }} />
@@ -52,11 +55,15 @@ function GroupStackScreen() {
 }
 
 const Tab = createBottomTabNavigator();
-function TabScreen() {
-  <Tab.Navigator>
-    <Tab.Screen name="Group" component={GroupStackScreen} />
-    <Tab.Screen name="Settings" component={Settings} />
-  </Tab.Navigator>
+function TabScreen(props) {
+  return (
+    <Tab.Navigator screenOptions={{
+      headerShown: false,
+    }}>
+      <Tab.Screen name="GroupStackScreen" component={GroupStackScreen} />
+      <Tab.Screen name="Settings" component={Settings} />
+    </Tab.Navigator>
+  )
 }
 
 
