@@ -6,12 +6,13 @@ export default function Login({ navigation }) {
 
   const [user, setUser] = React.useState(null);
 
-  React.useEffect(async () => {
-    const loggedInUser = await Auth.currentAuthenticatedUser();
-    if (null != loggedInUser) {
-
+  React.useEffect(() => {
+    Auth.currentAuthenticatedUser().then(loggedInUser => {
       navigation.navigate("TabNavigator");
-    }
+    }).catch(err => {
+      console.log("User has not logged in")
+    });
+
   });
   const signIn = () => {
     Auth.federatedSignIn({ provider: "Google" })
