@@ -19,14 +19,16 @@ Amplify.configure({
 const prefix = Linking.createURL("/");
 const config = {
   screens: {
-    TabNavigator: "loginCallback",
-    MainStackNavigator: "logoutCallback",
+    TabNavigator: {
+
+      screens: {
+        Group: "loginCallback",
+      }
+    },
+    Login: "logoutCallback",
     NotFound: "*",
-  },
-};
-
-
-
+  }
+}
 
 const App = () => {
   const linking = {
