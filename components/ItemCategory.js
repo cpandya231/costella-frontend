@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import CustomText from "./CustomText";
 
 export default function ItemCategory(props) {
   
   return (
     <View style={styles.catagory}>
-      <Text style={styles.catagoryText}>{props.name}</Text>
+      <CustomText style={styles.catagoryText}>{props.name}</CustomText>
     </View>
   );
 }

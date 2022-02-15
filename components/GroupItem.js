@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 
 import { useNavigation } from '@react-navigation/native';
 import GeneralStyles from '../styles/GeneralStyles';
+import CustomText from "./CustomText";
 
 const GroupItem = (props) => {
 
@@ -22,7 +23,7 @@ const GroupItem = (props) => {
         style={styles.itemDetail}
       >
         <View style={styles.itemDetail}>
-          <Text style={{ fontWeight: "bold", fontSize: 16 }}>{props.groupName}</Text>
+          <CustomText style={{ fontWeight: "bold", fontSize: 16 }}>{props.groupName}</CustomText>
         </View>
       </TouchableHighlight>
     </View>

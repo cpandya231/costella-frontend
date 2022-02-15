@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Button } from "react-native";
 import * as React from "react";
 import { Auth } from "aws-amplify";
+import CustomText from "./CustomText";
+
 export default function Settings() {
 
   const logout = () => {
@@ -11,7 +13,7 @@ export default function Settings() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Settings screen</Text>
+      <CustomText style={styles.text}>Settings screen</CustomText>
       <Button onPress={() => logout()} title="Logout"></Button>
     </View>
   );

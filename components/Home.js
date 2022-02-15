@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View, Button } from "react-native";
 import * as React from "react";
+import CustomText from "./CustomText";
 export default function Home({ navigation }) {
   React.useEffect(() => {
     setTimeout(() => navigation.navigate("Login"), 2000);
   }, [navigation]);
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Costella</Text>
+      <CustomText style={styles.text}>Costella</CustomText>
     </View>
   );
 }
@@ -14,12 +15,13 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFC900",
+    backgroundColor: "#ffffff",
     alignItems: "center",
     justifyContent: "center",
   },
   text: {
-    fontSize: 32,
+    fontSize: 48,
     height: 150,
+    fontWeight:"bold"
   },
 });

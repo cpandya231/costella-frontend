@@ -5,6 +5,7 @@ import GroupList from "./GroupList";
 import AddButton from "./AddButton";
 import { useNavigation } from '@react-navigation/native';
 import { Auth } from "aws-amplify";
+import CustomText from "./CustomText";
 
 const Group = (props) => {
   let username = props.username;
@@ -47,7 +48,7 @@ const Group = (props) => {
   return (
     <>
 
-      {isLoading ? <Text>Loading Groups...</Text> :
+      {isLoading ? <CustomText>Loading Groups...</CustomText> :
         <View style={styles.listContainer}>
 
           <GroupList data={data} />

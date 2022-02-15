@@ -4,6 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import Constants from 'expo-constants';
 import * as groupService from "../services/GroupService"
 import { useNavigation } from "@react-navigation/core";
+import CustomText from "./CustomText";
 
 export default function AddHisabForm({ route }) {
     let navigation = useNavigation();
@@ -45,7 +46,7 @@ export default function AddHisabForm({ route }) {
                 )}
                 name="name"
             />
-            {errors.name && <Text>This is required.</Text>}
+            {errors.name && <CustomText>This is required.</CustomText>}
 
             <Controller
                 control={control}

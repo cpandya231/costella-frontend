@@ -6,8 +6,9 @@ import awsconfig from "./src/aws-exports";
 import * as Linking from "expo-linking";
 import MainStackNavigator from "./navigators/MainStackNavigator";
 import TabNavigator from "./navigators/TabNavigator";
-
-
+import CustomText from "./components/CustomText";
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
 Amplify.configure({
   ...awsconfig,
@@ -31,6 +32,16 @@ const config = {
 }
 
 const App = () => {
+
+  let [fontsLoaded] = useFonts({
+    'Noto Sans': require('./assets/fonts/NotoSans-Regular.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
+
   const linking = {
     prefixes: [prefix],
     config,

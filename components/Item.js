@@ -2,19 +2,21 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import ItemCategory from "./ItemCategory";
 import GeneralStyles from '../styles/GeneralStyles';
+import CustomText from "./CustomText";
+
 export default function Item(props) {
 
   return (
     <View style={styles.item}>
       <View style={styles.itemDetail}>
-        <Text style={{ fontWeight: "bold" }}>{props.name}</Text>
+        <CustomText style={{ fontWeight: "bold" }}>{props.name}</CustomText>
         <FlatList style={styles.catagoryList} data={props.category}
           renderItem={({ item }) => <ItemCategory name={item} />}
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
 
-      <Text style={styles.itemAmount}>{'\u20B9'}{props.amount}</Text>
+      <CustomText style={styles.itemAmount}>{'\u20B9'}{props.amount}</CustomText>
     </View>
   );
 }

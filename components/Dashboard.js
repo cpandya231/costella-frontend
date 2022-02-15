@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import * as groupService from "../services/GroupService"
 import Constants from 'expo-constants';
 import GeneralStyles from "../styles/GeneralStyles";
+import CustomText from "./CustomText";
 
 const Dashboard = ({ route }) => {
   let navigation = useNavigation();
@@ -41,9 +42,9 @@ const Dashboard = ({ route }) => {
   return (
 
     <>
-      {isLoading ? <Text>Loading items...</Text> :
+      {isLoading ? <CustomText>Loading items...</CustomText> :
         <View style={styles.container}>
-          <Text style={styles.h1}>{route.params.groupName}</Text>
+          <CustomText style={styles.h1}>{route.params.groupName}</CustomText>
           <ListContainer data={data} />
           <AddButton onPress={() => addHisab()} />
         </View>

@@ -21,5 +21,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 32,
     height: 150,
+
   },
 });
