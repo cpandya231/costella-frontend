@@ -1,4 +1,4 @@
-import { StyleSheet, View, Button,Image,Text,TouchableHighlight } from "react-native";
+import { StyleSheet, View, Button, Image, Text, TouchableHighlight, TouchableNativeFeedback } from "react-native";
 import * as React from "react";
 import { Auth } from "aws-amplify";
 
@@ -25,17 +25,24 @@ export default function Login({ navigation }) {
 
 
   return (
-    
+
     <View style={styles.container}>
-         <Image
-          source={require("../assets/getting-started.png")}
-          style={{ height: 309, width: 329 }}
-        />
-        <TouchableHighlight style={styles.signinButton}>
-        <Text>Sign in with Google</Text>
-        </TouchableHighlight>
+      <Image
+        source={require("../assets/getting-started.png")}
+        style={{ height: 309, width: 329 }}
+      />
+      <TouchableNativeFeedback style={styles.signinButton} onPress={() => signIn()}
+
+      >
+        <View style={styles.signinButtonView}>
+          <Image
+            source={require("../assets/Google.png")}
+          />
+          <Text style={{ fontWeight: "bold", fontSize: 18 }}>Sign in with Google</Text>
+        </View>
+      </TouchableNativeFeedback>
       {/* <Button onPress={() => signIn()} title="Open Google"></Button> */}
-    </View>
+    </View >
   );
 
 }
@@ -47,17 +54,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  signinButton:{
-    width:245,
-    height:49,
-    borderWidth:1,
-    shadowOffset: {
-              width: 10,
-              height: 10
-            },
-    shadowRadius:1,        
-    borderRadius:20,
-    shadowColor: 'rgba(0, 0, 0, 0.75)',
-      elevation: -5
+  signinButton: {
+    justifyContent: "center",
+
+  },
+  signinButtonView: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    elevation: 5,
+    borderRadius: 20,
+    backgroundColor: "#fff",
+    width: 245,
+    height: 49,
+    marginTop: 83,
+
   }
+
 });
