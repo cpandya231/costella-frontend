@@ -6,6 +6,7 @@ import AddButton from "./AddButton";
 import { useNavigation } from '@react-navigation/native';
 import { Auth } from "aws-amplify";
 import CustomText from "./CustomText";
+import CustomHeader from "./CustomHeader";
 
 const Group = (props) => {
   let username = props.username;
@@ -50,7 +51,7 @@ const Group = (props) => {
 
       {isLoading ? <CustomText>Loading Groups...</CustomText> :
         <View style={styles.listContainer}>
-
+          <CustomHeader>My Groups</CustomHeader>
           <GroupList data={data} />
           <AddButton onPress={() => addGroup()} />
         </View>
@@ -63,7 +64,7 @@ const Group = (props) => {
 const styles = StyleSheet.create({
   listContainer: {
     flex: 5,
-    backgroundColor: "#f8f8f8",
+    backgroundColor: "#fff",
 
   }
 });

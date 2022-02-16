@@ -10,12 +10,7 @@ export default function CustomText(props) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#FFC900",
-        alignItems: "center",
-        justifyContent: "center",
-    },
+  
     text: {
         fontFamily: 'Noto Sans'
     },

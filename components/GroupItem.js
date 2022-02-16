@@ -23,7 +23,8 @@ const GroupItem = (props) => {
         style={styles.itemDetail}
       >
         <View style={styles.itemDetail}>
-          <CustomText style={{ fontWeight: "bold", fontSize: 16 }}>{props.groupName}</CustomText>
+          <CustomText style={{ fontSize: 18 }}>{props.groupName}</CustomText>
+          <Text style={{ fontSize: 12, fontFamily: "Noto Sans Light" }}>Created on: 9 Feb 2022</Text>
         </View>
       </TouchableHighlight>
     </View>

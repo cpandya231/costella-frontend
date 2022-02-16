@@ -1,11 +1,11 @@
-import { StyleSheet, View, Button, Image, Text, TouchableHighlight, TouchableNativeFeedback } from "react-native";
+import { StyleSheet, View, Image, TouchableNativeFeedback } from "react-native";
 import * as React from "react";
 import { Auth } from "aws-amplify";
+import CustomText from "./CustomText";
 
 
 export default function Login({ navigation }) {
 
-  const [user, setUser] = React.useState(null);
 
   React.useEffect(() => {
     Auth.currentAuthenticatedUser().then(loggedInUser => {
@@ -38,10 +38,10 @@ export default function Login({ navigation }) {
           <Image
             source={require("../assets/Google.png")}
           />
-          <Text style={{ fontWeight: "bold", fontSize: 18 }}>Sign in with Google</Text>
+          <CustomText style={{ fontWeight: "bold", fontSize: 18 }}>Sign in with Google</CustomText>
         </View>
       </TouchableNativeFeedback>
-      {/* <Button onPress={() => signIn()} title="Open Google"></Button> */}
+
     </View >
   );
 
