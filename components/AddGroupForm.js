@@ -1,10 +1,12 @@
 import React from "react";
 import { Text, View, TextInput, Button, Alert, StyleSheet } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import Constants from 'expo-constants';
+
 import * as groupService from "../services/GroupService"
 import { useNavigation } from "@react-navigation/core";
 import CustomText from "./CustomText"
+import CustomHeader from "./CustomHeader";
+import AddButton from "./AddButton";
 
 export default function AddGroupForm({ route }) {
     let navigation = useNavigation();
@@ -29,23 +31,34 @@ export default function AddGroupForm({ route }) {
 
     return (
         <View style={styles.container}>
-            <Controller
-                control={control}
-                rules={{
-                    required: true,
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                        style={styles.input}
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                    />
-                )}
-                name="groupName"
-            />
-            {errors.name && <CustomText>This is required.</CustomText>}
-            <Button style={styles.button} title="Submit" onPress={handleSubmit(onSubmit)} />
+            <CustomHeader>Create New Group</CustomHeader>
+            <View style={styles.controller}>
+                <Controller
+
+                    control={control}
+                    rules={{
+                        required: true,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <>
+                            <CustomText style={{ fontSize: 18 }}>Group Name:</CustomText>
+                            <TextInput
+                                style={styles.input}
+                                onBlur={onBlur}
+                                onChangeText={onChange}
+                                value={value}
+                                placeholder="eg. Family, Friends"
+                            />
+                        </>
+
+                    )}
+                    name="groupName"
+                />
+                {errors.name && <CustomText>This is required.</CustomText>}
+                <View style={{ alignItems: "flex-end", marginTop: 47 }}>
+                    <AddButton name="Submit" onPress={handleSubmit(onSubmit)} style={styles.submitButton} />
+                </View>
+            </View>
         </View>
     );
 }
@@ -60,22 +73,30 @@ const styles = StyleSheet.create({
     button: {
         marginTop: 500,
         height: 70,
-        backgroundColor: '#ec5990',
+
         borderRadius: 4,
     },
     container: {
         flex: 1,
-        padding: 8,
-        paddingTop: Constants.statusBarHeight,
+
+        backgroundColor: "#fff"
+
     },
     input: {
-        backgroundColor: 'white',
-        borderWidth: 1,
-        borderRadius: 100,
-        height: 40,
-        padding: 10,
-        borderRadius: 4,
+        backgroundColor: 'rgba(196,196,196,0.2)',
 
-        marginBottom: 10
+        borderRadius: 5,
+        height: 50,
+        padding: 16,
+        borderRadius: 4,
+        marginTop: 24
+
     },
+    controller: {
+
+        padding: 24,
+
+
+    },
+
 });

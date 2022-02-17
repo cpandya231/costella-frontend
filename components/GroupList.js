@@ -25,7 +25,5 @@ const styles = StyleSheet.create({
     marginTop: 40
 
   },
-  flatListContainer: {
 
-  }
 });

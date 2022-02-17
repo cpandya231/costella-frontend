@@ -10,8 +10,9 @@ export default function CustomText(props) {
 }
 
 const styles = StyleSheet.create({
-  
+
     text: {
-        fontFamily: 'Noto Sans'
+        fontFamily: 'Noto Sans',
+        fontSize: 18
     },
 });

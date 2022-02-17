@@ -1,5 +1,5 @@
 
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, View, TouchableHighlight, TouchableNativeFeedback } from "react-native";
 
 import { useNavigation } from '@react-navigation/native';
 import GeneralStyles from '../styles/GeneralStyles';
@@ -23,7 +23,7 @@ const GroupItem = (props) => {
 
 
   return (
-    <TouchableHighlight
+    <TouchableNativeFeedback
       onPress={() => getItems()}
 
     >
@@ -40,7 +40,7 @@ const GroupItem = (props) => {
         </View>
 
       </View>
-    </TouchableHighlight >
+    </TouchableNativeFeedback >
   );
 }
 
@@ -56,8 +56,8 @@ var stringToColour = function (str) {
     var value = (hash >> (i * 8)) & 255;
     rgb[i] = value;
   }
-  console.log('Color ' + `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]},0.5)`)
-  return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]},0.5)`;
+
+  return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]},0.4)`;
 }
 
 const styles = StyleSheet.create({

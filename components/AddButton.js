@@ -1,36 +1,31 @@
 
 import {
   StyleSheet,
-  Text,
   View,
-  Button,
-  Image,
-  TouchableHighlight,
+  TouchableNativeFeedback,
 } from "react-native";
 import CustomText from "./CustomText";
 
 export default function AddButton(props) {
 
-  return (<>
-    <TouchableHighlight
+  return (
+    <TouchableNativeFeedback
 
       onPress={() => props.onPress()}
     >
-      <View style={styles.addButton}>
+      <View style={StyleSheet.compose([styles.addButton, props.style])}>
         <CustomText style={styles.addButtonText}>{props.name}</CustomText>
       </View>
 
 
-    </TouchableHighlight>
-  </>
+    </TouchableNativeFeedback>
+
   );
 }
 
 const styles = StyleSheet.create({
   addButton: {
-    position: "absolute",
-    right: 26,
-    bottom: 33,
+
     width: 134,
     height: 46,
     backgroundColor: "#11999E",
