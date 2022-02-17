@@ -1,16 +1,18 @@
 import { StyleSheet } from 'react-native';
 export default GeneralStyles = {
     item: {
-        height: 80,
+        height: 100,
         padding: 20,
 
         borderRadius: 10,
         flexDirection: "row",
-        justifyContent: "space-evenly",
+
+        alignItems: "center",
         backgroundColor: "#FFF",
 
 
         borderBottomWidth: 1,
+        borderColor: 'rgba(0,0,0,0.2)'
 
     },
 

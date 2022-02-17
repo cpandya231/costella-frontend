@@ -53,7 +53,7 @@ const Group = (props) => {
         <View style={styles.listContainer}>
           <CustomHeader>My Groups</CustomHeader>
           <GroupList data={data} />
-          <AddButton onPress={() => addGroup()} />
+          <AddButton onPress={() => addGroup()} name="Add Group" />
         </View>
       }
 

@@ -7,27 +7,43 @@ import {
   Image,
   TouchableHighlight,
 } from "react-native";
+import CustomText from "./CustomText";
 
 export default function AddButton(props) {
-  
+
   return (<>
-      <TouchableHighlight
-        style={styles.addButton}
-        onPress={() => props.onPress()}
-      >
-        <Image
-          source={require("../assets/icons8-add-100.png")}
-          style={{ height: 80, width: 80 }}
-        />
-      </TouchableHighlight>
-      </>
+    <TouchableHighlight
+
+      onPress={() => props.onPress()}
+    >
+      <View style={styles.addButton}>
+        <CustomText style={styles.addButtonText}>{props.name}</CustomText>
+      </View>
+
+
+    </TouchableHighlight>
+  </>
   );
 }
 
 const styles = StyleSheet.create({
   addButton: {
     position: "absolute",
-    right: 0,
-    bottom: 0,
+    right: 26,
+    bottom: 33,
+    width: 134,
+    height: 46,
+    backgroundColor: "#11999E",
+
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+
   },
+  addButtonText: {
+
+
+    color: "#fff",
+    fontSize: 18
+  }
 });
