@@ -54,7 +54,7 @@ export default function AddGroupForm({ route }) {
                     )}
                     name="groupName"
                 />
-                {errors.name && <CustomText>This is required.</CustomText>}
+                {errors.groupName && <CustomText>This is required.</CustomText>}
                 <View style={{ alignItems: "flex-end", marginTop: 47 }}>
                     <AddButton name="Submit" onPress={handleSubmit(onSubmit)} style={styles.submitButton} />
                 </View>

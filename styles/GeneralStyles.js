@@ -15,6 +15,14 @@ export default GeneralStyles = {
         borderColor: 'rgba(0,0,0,0.2)'
 
     },
+    itemDetail: {
+
+        marginLeft: 20,
+        flex: 1,
+        justifyContent: "space-between",
+        height: 55,
+
+    },
 
     h1: {
         fontWeight: 'bold',

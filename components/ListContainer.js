@@ -21,7 +21,7 @@ export default function ListContainer(props) {
 const styles = StyleSheet.create({
   listContainer: {
     flex: 5,
-    backgroundColor: "#f8f8f8",
+    backgroundColor: "#fff",
 
   },
   flatListContainer: {

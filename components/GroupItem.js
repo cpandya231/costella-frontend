@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import GeneralStyles from '../styles/GeneralStyles';
 import CustomText from "./CustomText";
 import { generateRandomString } from "@aws-amplify/core";
+import Circle from "./Circle";
 
 const GroupItem = (props) => {
 
@@ -20,8 +21,6 @@ const GroupItem = (props) => {
   }
 
 
-
-
   return (
     <TouchableNativeFeedback
       onPress={() => getItems()}
@@ -29,10 +28,7 @@ const GroupItem = (props) => {
     >
       <View style={styles.item}>
 
-        <View style={
-          StyleSheet.compose([{ backgroundColor: stringToColour(props.groupName) }, styles.circle])
-
-        }><CustomText>{props.groupName.charAt(0)}</CustomText></View>
+        <Circle name={props.groupName} />
         <View style={styles.itemDetail}>
 
           <CustomText style={{ fontSize: 18 }}>{props.groupName}</CustomText>
@@ -44,40 +40,10 @@ const GroupItem = (props) => {
   );
 }
 
-var stringToColour = function (str) {
-  var hash = 0;
-  if (str.length === 0) return hash;
-  for (var i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    hash = hash & hash;
-  }
-  var rgb = [0, 0, 0];
-  for (var i = 0; i < 3; i++) {
-    var value = (hash >> (i * 8)) & 255;
-    rgb[i] = value;
-  }
-
-  return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]},0.4)`;
-}
 
 const styles = StyleSheet.create({
   item: GeneralStyles.item,
-  itemDetail: {
-
-    marginLeft: 20,
-    flex: 1,
-    justifyContent: "space-between",
-    height: 50,
-
-  },
-  circle: {
-    borderRadius: 50,
-    width: 48,
-    height: 48,
-    // backgroundColor: '#E4F9F5',
-    alignItems: "center",
-    justifyContent: "center"
-  }
+  itemDetail: GeneralStyles.itemDetail,
 
 });
 

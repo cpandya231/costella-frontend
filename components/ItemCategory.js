@@ -1,25 +1,31 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import CustomText from "./CustomText";
+import { StyleSheet, View, Text } from "react-native";
+
 
 export default function ItemCategory(props) {
-  
+
   return (
     <View style={styles.catagory}>
-      <CustomText style={styles.catagoryText}>{props.name}</CustomText>
+      <Text style={styles.catagoryText}>{props.name}</Text>
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  catagory:{
-  borderRadius:5,
-   backgroundColor:"#FCFFA6",
- 
-   padding:5
+  catagory: {
+    borderRadius: 20,
+    width: 70,
+
+    backgroundColor: "#C4C4C4",
+
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 5
   },
-  catagoryText:{
-  color:"#1A5F7A",
-  
+  catagoryText: {
+    color: "#000",
+    fontSize: 12,
+    fontFamily: "Noto Sans Light"
+
   }
 });

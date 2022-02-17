@@ -10,9 +10,9 @@ import AddButton from "./AddButton";
 import { useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from "react";
 import * as groupService from "../services/GroupService"
-import Constants from 'expo-constants';
 import GeneralStyles from "../styles/GeneralStyles";
 import CustomText from "./CustomText";
+import CustomHeader from "./CustomHeader";
 
 const Dashboard = ({ route }) => {
   let navigation = useNavigation();
@@ -44,9 +44,13 @@ const Dashboard = ({ route }) => {
     <>
       {isLoading ? <CustomText>Loading items...</CustomText> :
         <View style={styles.container}>
-          <CustomText style={styles.h1}>{route.params.groupName}</CustomText>
+          <CustomHeader>{route.params.groupName}</CustomHeader>
           <ListContainer data={data} />
-          <AddButton onPress={() => addHisab()} />
+          <AddButton onPress={() => addHisab()} name="Add Expense" style={{
+            position: "absolute",
+            right: 26,
+            bottom: 33
+          }}></AddButton>
         </View>
       }
     </>
@@ -54,11 +58,11 @@ const Dashboard = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
-  h1: GeneralStyles.h1,
+
   container: {
     flex: 1,
-    backgroundColor: "#f8f8f8",
-    paddingTop: Constants.statusBarHeight,
+    backgroundColor: "#fff",
+
   },
 
 
