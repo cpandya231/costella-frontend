@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/core";
 import CustomText from "./CustomText"
 import CustomHeader from "./CustomHeader";
 import AddButton from "./AddButton";
+import CustomTextInput from "./CustomTextInput";
 
 export default function AddGroupForm({ route }) {
     let navigation = useNavigation();
@@ -33,6 +34,7 @@ export default function AddGroupForm({ route }) {
         <View style={styles.container}>
             <CustomHeader>Create New Group</CustomHeader>
             <View style={styles.controller}>
+
                 <Controller
 
                     control={control}
@@ -40,23 +42,21 @@ export default function AddGroupForm({ route }) {
                         required: true,
                     }}
                     render={({ field: { onChange, onBlur, value } }) => (
-                        <>
-                            <CustomText style={{ fontSize: 18 }}>Group Name:</CustomText>
-                            <TextInput
-                                style={styles.input}
-                                onBlur={onBlur}
-                                onChangeText={onChange}
-                                value={value}
-                                placeholder="eg. Family, Friends"
-                            />
-                        </>
+                        <CustomTextInput
+                            onChange={onChange}
+                            onBlur={onBlur}
+
+                            value={value}
+                            name="GroupName"
+                            label="Group Name"
+                            placeholder="eg. Family, Friends" />
 
                     )}
                     name="groupName"
                 />
                 {errors.groupName && <CustomText>This is required.</CustomText>}
                 <View style={{ alignItems: "flex-end", marginTop: 47 }}>
-                    <AddButton name="Submit" onPress={handleSubmit(onSubmit)} style={styles.submitButton} />
+                    <AddButton name="Submit" onPress={handleSubmit(onSubmit)} />
                 </View>
             </View>
         </View>
@@ -65,37 +65,19 @@ export default function AddGroupForm({ route }) {
 
 const styles = StyleSheet.create({
 
-    label: {
-        color: 'white',
-        margin: 20,
-        marginLeft: 0,
-    },
-    button: {
-        marginTop: 500,
-        height: 70,
 
-        borderRadius: 4,
-    },
     container: {
         flex: 1,
 
         backgroundColor: "#fff"
 
     },
-    input: {
-        backgroundColor: 'rgba(196,196,196,0.2)',
 
-        borderRadius: 5,
-        height: 50,
-        padding: 16,
-        borderRadius: 4,
-        marginTop: 24
-
-    },
     controller: {
 
         padding: 24,
-
+        height: 350,
+        justifyContent: "space-evenly"
 
     },
 
