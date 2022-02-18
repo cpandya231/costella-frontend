@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, TextInput, Button, Alert, StyleSheet } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Constants from 'expo-constants';
@@ -8,26 +8,28 @@ import CustomText from "./CustomText";
 import CustomTextInput from "./CustomTextInput";
 import CustomHeader from "./CustomHeader";
 import AddButton from "./AddButton";
+import { Picker } from '@react-native-picker/picker';
 
 export default function AddHisabForm({ route }) {
     let navigation = useNavigation();
-
+    const { groupName, groupId } = route.params;
+    const [selectedCategory, setSelectedCategory] = useState("Grocery");
     const { control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             itemName: '',
-            amount: ''
+            amount: '',
+            category: ['Grocery']
         }
     });
     const onSubmit = async (data) => {
 
         console.log(data);
         data["groupId"] = route.params.groupId;
-        data['category'] = ["Grocery"];
-        data['purchaseDate'] = "27/01/2022";
+
         let addItemResponse = await groupService.addGroupItem(data);
         let groupItems = route.params.groupItems;
         groupItems.push(data);
-        navigation.navigate("Dashboard", { "groupId": route.params.groupId, "groupItems": groupItems });
+        navigation.navigate("Dashboard", { groupId, groupName, "groupItems": groupItems });
 
     }
 
@@ -52,7 +54,7 @@ export default function AddHisabForm({ route }) {
                             placeholder="eg. Oranges, Bananas" />
 
                     )}
-                    name="itemName"
+                    name="name"
                 />
                 {errors.itemName && <CustomText>This is required.</CustomText>}
 
@@ -74,6 +76,44 @@ export default function AddHisabForm({ route }) {
                     name="amount"
                 />
 
+                <Controller
+                    control={control}
+                    rules={{
+                        required: true,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <Picker
+                            selectedValue={selectedCategory}
+                            onValueChange={(itemValue, itemIndex) => {
+                                onChange([itemValue]);
+                                setSelectedCategory(itemValue);
+                            }
+
+                            }>
+                            <Picker.Item label="Grocery" value="Grocery" />
+                            <Picker.Item label="Fruits" value="Fruits" />
+                        </Picker>
+                    )}
+                    name="category"
+                />
+
+                <Controller
+                    control={control}
+                    rules={{
+                        required: true,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <CustomTextInput
+                            onChange={onChange}
+                            onBlur={onBlur}
+
+                            value={value}
+                            name="purchaseDate"
+                            label="Purchase Date"
+                            placeholder="" />
+                    )}
+                    name="purchaseDate"
+                />
                 <View style={{ alignItems: "flex-end", marginTop: 47 }}>
                     <AddButton name="Submit" onPress={handleSubmit(onSubmit)} />
                 </View>

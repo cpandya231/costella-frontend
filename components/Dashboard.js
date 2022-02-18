@@ -16,6 +16,7 @@ import CustomHeader from "./CustomHeader";
 
 const Dashboard = ({ route }) => {
   let navigation = useNavigation();
+  const { groupName, groupId } = route.params;
   const [data, setData] = useState(route.params.groupItems);
   const [isLoading, setLoading] = useState(true);
 
@@ -35,7 +36,7 @@ const Dashboard = ({ route }) => {
 
   const addHisab = () => {
 
-    navigation.navigate("AddHisabForm", { "groupId": route.params.groupId, "groupItems": data });
+    navigation.navigate("AddHisabForm", { groupId, groupName, "groupItems": data });
 
   }
 
@@ -44,7 +45,7 @@ const Dashboard = ({ route }) => {
     <>
       {isLoading ? <CustomText>Loading items...</CustomText> :
         <View style={styles.container}>
-          <CustomHeader>{route.params.groupName}</CustomHeader>
+          <CustomHeader>{groupName}</CustomHeader>
           <ListContainer data={data} />
           <AddButton onPress={() => addHisab()} name="Add Expense" style={{
             position: "absolute",
