@@ -9,11 +9,14 @@ import CustomTextInput from "./CustomTextInput";
 import CustomHeader from "./CustomHeader";
 import AddButton from "./AddButton";
 import { Picker } from '@react-native-picker/picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function AddHisabForm({ route }) {
     let navigation = useNavigation();
     const { groupName, groupId } = route.params;
     const [selectedCategory, setSelectedCategory] = useState("Grocery");
+    const [date, setDate] = useState(new Date(1598051730000));
+
     const { control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             itemName: '',
@@ -103,14 +106,25 @@ export default function AddHisabForm({ route }) {
                         required: true,
                     }}
                     render={({ field: { onChange, onBlur, value } }) => (
-                        <CustomTextInput
-                            onChange={onChange}
-                            onBlur={onBlur}
+                        // <CustomTextInput
+                        //     onChange={onChange}
+                        //     onBlur={onBlur}
 
-                            value={value}
-                            name="purchaseDate"
-                            label="Purchase Date"
-                            placeholder="" />
+                        //     value={value}
+                        //     name="purchaseDate"
+                        //     label="Purchase Date"
+                        //     placeholder="" />
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={date}
+                            mode={'date'}
+                            is24Hour={true}
+                            display="default"
+                            onChange={(itemValue) => {
+                                onChange(itemValue);
+                                setDate(itemValue);
+                            }}
+                        />
                     )}
                     name="purchaseDate"
                 />
