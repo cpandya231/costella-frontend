@@ -8,6 +8,7 @@ import CustomText from "./CustomText"
 import CustomHeader from "./CustomHeader";
 import AddButton from "./AddButton";
 import CustomTextInput from "./CustomTextInput";
+import GeneralStyles from "../styles/GeneralStyles";
 
 export default function AddGroupForm({ route }) {
     let navigation = useNavigation();
@@ -54,7 +55,7 @@ export default function AddGroupForm({ route }) {
                     )}
                     name="groupName"
                 />
-                {errors.groupName && <CustomText>This is required.</CustomText>}
+                {errors.groupName && <CustomText style={styles.error}>This is required.</CustomText>}
                 <View style={{ alignItems: "flex-end", marginTop: 47 }}>
                     <AddButton name="Submit" onPress={handleSubmit(onSubmit)} />
                 </View>
@@ -80,5 +81,6 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly"
 
     },
+    error: GeneralStyles.error
 
 });

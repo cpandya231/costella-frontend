@@ -28,6 +28,9 @@ export default GeneralStyles = {
         fontWeight: 'bold',
         fontSize: 20,
         marginLeft: 10
+    },
+    error: {
+        color: "red"
     }
 };
 
