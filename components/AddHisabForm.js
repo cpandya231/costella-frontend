@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, Button, Alert, StyleSheet } from "react-native";
+import { View, Button, StyleSheet } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import Constants from 'expo-constants';
 import * as groupService from "../services/GroupService"
 import { useNavigation } from "@react-navigation/core";
 import CustomText from "./CustomText";
@@ -11,17 +10,19 @@ import AddButton from "./AddButton";
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
+
 export default function AddHisabForm({ route }) {
     let navigation = useNavigation();
     const { groupName, groupId } = route.params;
     const [selectedCategory, setSelectedCategory] = useState("Grocery");
-    const [date, setDate] = useState(new Date(1598051730000));
-
+    const [date, setDate] = useState(new Date(Date.now()));
+    const [show, setShow] = useState(false);
     const { control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
-            itemName: '',
+            name: '',
             amount: '',
-            category: ['Grocery']
+            category: ['Grocery'],
+            purchaseDate: date.toDateString()
         }
     });
     const onSubmit = async (data) => {
@@ -52,19 +53,19 @@ export default function AddHisabForm({ route }) {
                             onBlur={onBlur}
 
                             value={value}
-                            name="itemName"
+                            name="name"
                             label="Item Name"
                             placeholder="eg. Oranges, Bananas" />
 
                     )}
                     name="name"
                 />
-                {errors.itemName && <CustomText>This is required.</CustomText>}
+                {errors.name && <CustomText>This is required.</CustomText>}
 
                 <Controller
                     control={control}
                     rules={{
-                        maxLength: 100,
+                        required: true,
                     }}
                     render={({ field: { onChange, onBlur, value } }) => (
                         <CustomTextInput
@@ -78,7 +79,7 @@ export default function AddHisabForm({ route }) {
                     )}
                     name="amount"
                 />
-
+                {errors.amount && <CustomText>This is required.</CustomText>}
                 <Controller
                     control={control}
                     rules={{
@@ -106,28 +107,48 @@ export default function AddHisabForm({ route }) {
                         required: true,
                     }}
                     render={({ field: { onChange, onBlur, value } }) => (
-                        // <CustomTextInput
-                        //     onChange={onChange}
-                        //     onBlur={onBlur}
 
-                        //     value={value}
-                        //     name="purchaseDate"
-                        //     label="Purchase Date"
-                        //     placeholder="" />
-                        <DateTimePicker
-                            testID="dateTimePicker"
-                            value={date}
-                            mode={'date'}
-                            is24Hour={true}
-                            display="default"
-                            onChange={(itemValue) => {
-                                onChange(itemValue);
-                                setDate(itemValue);
-                            }}
-                        />
+                        (
+
+                            <View>
+                                <View>
+                                    <CustomTextInput
+
+                                        onBlur={onBlur}
+
+                                        value={value}
+                                        name="purchaseDate"
+                                        label="Purchase Date"
+                                    />
+                                    <Button onPress={() => setShow(true)} title="Show date picker!" />
+                                </View>
+                                {show && <DateTimePicker
+                                    testID="dateTimePicker"
+                                    value={date}
+                                    mode={'date'}
+                                    is24Hour={true}
+                                    display="default"
+                                    maximumDate={new Date(Date.now())}
+                                    onChange={(event, itemValue) => {
+                                        console.log(`${JSON.stringify(event)}`)
+                                        setShow(false)
+                                        if (event.type != 'dismissed') {
+                                            onChange(new Date(itemValue).toDateString())
+                                        }
+
+
+
+                                    }}
+                                />}
+                            </View>
+
+
+
+                        )
                     )}
                     name="purchaseDate"
                 />
+                {errors.purchaseDate && <CustomText>This is required.</CustomText>}
                 <View style={{ alignItems: "flex-end", marginTop: 47 }}>
                     <AddButton name="Submit" onPress={handleSubmit(onSubmit)} />
                 </View>
