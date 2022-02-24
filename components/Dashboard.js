@@ -13,6 +13,7 @@ import * as groupService from "../services/GroupService"
 import GeneralStyles from "../styles/GeneralStyles";
 import CustomText from "./CustomText";
 import CustomHeader from "./CustomHeader";
+import CustomCalenderStrip from "./CustomCalenderStrip";
 
 const Dashboard = ({ route }) => {
   let navigation = useNavigation();
@@ -46,12 +47,13 @@ const Dashboard = ({ route }) => {
       {isLoading ? <CustomText>Loading items...</CustomText> :
         <View style={styles.container}>
           <CustomHeader>{groupName}</CustomHeader>
-          <ListContainer data={data} />
+          <CustomCalenderStrip />
+          {/* <ListContainer data={data} />
           <AddButton onPress={() => addHisab()} name="Add Expense" style={{
             position: "absolute",
             right: 26,
             bottom: 33
-          }}></AddButton>
+          }}></AddButton> */}
         </View>
       }
     </>
@@ -63,6 +65,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+
 
   },
 
