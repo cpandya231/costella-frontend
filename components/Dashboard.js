@@ -47,13 +47,13 @@ const Dashboard = ({ route }) => {
       {isLoading ? <CustomText>Loading items...</CustomText> :
         <View style={styles.container}>
           <CustomHeader>{groupName}</CustomHeader>
-          <CustomCalenderStrip />
-          {/* <ListContainer data={data} />
+          <CustomCalenderStrip style={{ height: 170, marginTop: 20, padding: 10 }} />
+          <ListContainer data={data} />
           <AddButton onPress={() => addHisab()} name="Add Expense" style={{
             position: "absolute",
             right: 26,
             bottom: 33
-          }}></AddButton> */}
+          }}></AddButton>
         </View>
       }
     </>
