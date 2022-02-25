@@ -139,8 +139,10 @@ export default function AddHisabForm({ route }) {
                                     maximumDate={new Date(Date.now())}
                                     onChange={(event, itemValue) => {
                                         console.log(`${JSON.stringify(event)}`)
-                                        setShow(false)
+                                        setShow(false);
+
                                         if (event.type != 'dismissed') {
+                                            setDate(new Date(itemValue))
                                             onChange(format(new Date(itemValue), "dd/MM/yyyy"))
                                         }
 
