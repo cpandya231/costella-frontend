@@ -47,7 +47,7 @@ const Dashboard = ({ route }) => {
       {isLoading ? <CustomText>Loading items...</CustomText> :
         <View style={styles.container}>
           <CustomHeader>{groupName}</CustomHeader>
-          <CustomCalenderStrip style={{ height: 170, marginTop: 20, padding: 10 }} />
+          <CustomCalenderStrip />
           <ListContainer data={data} />
           <AddButton onPress={() => addHisab()} name="Add Expense" style={{
             position: "absolute",
