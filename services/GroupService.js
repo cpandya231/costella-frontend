@@ -52,10 +52,10 @@ export const addGroup = async (body) => {
 }
 
 
-export const getGroupItem = async (groupId) => {
+export const getGroupItem = async (groupId, createdDate) => {
     const JWT_TOKEN = await getAccessJwtToken();
-    let itemUrl = url + 'item/' + groupId;
-
+    let itemUrl = `${url}item/${groupId}?createdDate=${createdDate}`;
+    console.log(`Url before calling getGroupItem ${itemUrl}`);
     const response = await fetch(itemUrl, {
         method: 'GET',
         headers: {
@@ -68,6 +68,7 @@ export const getGroupItem = async (groupId) => {
         console.log("Item data " + JSON.stringify(itemData));
         return itemData;
     } else {
+        console.log(response)
         console.error(response.status);
         return null;
     }

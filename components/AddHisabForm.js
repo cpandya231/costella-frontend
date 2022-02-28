@@ -25,7 +25,7 @@ export default function AddHisabForm({ route }) {
             name: '',
             amount: '',
             category: ['Grocery'],
-            purchaseDate: format(date, "dd/MM/yyyy")
+            purchaseDate: formattedDate(date)
         }
     });
     const onSubmit = async (data) => {
@@ -143,7 +143,7 @@ export default function AddHisabForm({ route }) {
 
                                         if (event.type != 'dismissed') {
                                             setDate(new Date(itemValue))
-                                            onChange(format(new Date(itemValue), "dd/MM/yyyy"))
+                                            onChange(formattedDate(new Date(itemValue)))
                                         }
 
                                     }}
@@ -190,3 +190,7 @@ const styles = StyleSheet.create({
     },
     error: GeneralStyles.error
 });
+
+function formattedDate(date) {
+    return format(date, "yyyy-MM-dd")
+}
