@@ -5,9 +5,9 @@ import * as constants from '../constants/constants';
 let url = constants.BASE_URL + 'group/';
 
 
-export const getGroups = async (username) => {
-
+export const getGroups = async () => {
     const JWT_TOKEN = await getAccessJwtToken();
+    let username = await getUserName();
 
     const response = await fetch(url + username, {
         method: 'GET',
@@ -27,10 +27,10 @@ export const getGroups = async (username) => {
 
 }
 
-export const addGroup = async (username, body) => {
+export const addGroup = async (body) => {
     console.log("Adding Group using " + JSON.stringify(body));
     const JWT_TOKEN = await getAccessJwtToken();
-
+    let username = await getUserName();
     const response = await fetch(url + username, {
         method: 'POST',
         headers: {
@@ -102,6 +102,12 @@ export const addGroupItem = async (body) => {
 const getAccessJwtToken = async () => {
     // Auth.currentSession() checks if token is expired and refreshes with Cognito if needed automatically
     const session = await Auth.currentSession();
+
     return session.getAccessToken().getJwtToken();
 };
 
+const getUserName = async () => {
+    const loggedInUser = await Auth.currentAuthenticatedUser();
+    return loggedInUser.username;
+
+}

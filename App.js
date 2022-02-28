@@ -10,14 +10,37 @@ import CustomText from "./components/CustomText";
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
+
+const prefix = Linking.createURL("/");
+
+const isLocalhost = Boolean(
+  prefix.startsWith("exp://")
+);
+
+const [
+  localRedirectSignIn,
+  productionRedirectSignIn,
+] = awsconfig.oauth.redirectSignIn.split(",");
+
+const [
+  localRedirectSignOut,
+  productionRedirectSignOut,
+] = awsconfig.oauth.redirectSignOut.split(",");
+
 Amplify.configure({
   ...awsconfig,
   Analytics: {
     disabled: true,
   },
+  oauth: {
+    ...awsconfig.oauth,
+    redirectSignIn: isLocalhost ? localRedirectSignIn : productionRedirectSignIn,
+    redirectSignOut: isLocalhost ? localRedirectSignOut : productionRedirectSignOut,
+  }
 });
 
-const prefix = Linking.createURL("/");
+
+console.log(`In App.js ${prefix}`)
 const config = {
   screens: {
     TabNavigator: {

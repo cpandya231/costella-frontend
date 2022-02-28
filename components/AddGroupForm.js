@@ -22,7 +22,8 @@ export default function AddGroupForm({ route }) {
 
         console.log(data);
 
-        let addGroupResponse = await groupService.addGroup(route.params.username, data);
+        let addGroupResponse = await groupService.addGroup(data);
+
         data["groupId"] = addGroupResponse["groupId"];
         let groups = route.params.groups;
         groups.push(data);

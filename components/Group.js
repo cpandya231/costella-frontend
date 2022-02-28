@@ -23,9 +23,8 @@ const Group = (props) => {
 
   const getGroups = async () => {
     try {
-      const loggedInUser = await Auth.currentAuthenticatedUser();
-      username = loggedInUser.username;
-      let groupData = await groupService.getGroups(username);
+
+      let groupData = await groupService.getGroups();
       setData(groupData);
       setLoading(false);
 
