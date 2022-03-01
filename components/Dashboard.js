@@ -1,6 +1,6 @@
 import {
   StyleSheet,
-  View, Image, TouchableNativeFeedback
+  View
 } from "react-native";
 import ListContainer from "./ListContainer";
 import AddButton from "./AddButton";
@@ -13,7 +13,6 @@ import CustomHeader from "./CustomHeader";
 import CustomCalenderStrip from "./CustomCalenderStrip";
 
 import { format } from 'date-fns'
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 const Dashboard = ({ route }) => {
   let navigation = useNavigation();
@@ -29,16 +28,23 @@ const Dashboard = ({ route }) => {
     selectedDateString: formattedDate(new Date(Date.now())),
 
   })
-  const [show, setShow] = useState(false);
+
 
   useEffect(() => {
-    getGroupItems();
+    console.log(`Inside use effect ${dateObj.selectedDateString}`)
+    getGroupItems(dateObj.selectedDateString);
   }, []);
 
 
+  const changeDate = (dateObj) => {
 
-  const getGroupItems = async () => {
-    let groupItems = await groupService.getGroupItem(route.params.groupId, dateObj.selectedDateString);
+    getGroupItems(dateObj.selectedDateString);
+    setDateObj(dateObj);
+  }
+
+  const getGroupItems = async (createdDate) => {
+    console.log("Getting group items");
+    let groupItems = await groupService.getGroupItem(route.params.groupId, createdDate);
     setData(groupItems);
     setLoading(false);
   }
@@ -55,17 +61,8 @@ const Dashboard = ({ route }) => {
       {isLoading ? <CustomText>Loading items...</CustomText> :
         <View style={styles.container}>
           <CustomHeader>{groupName}</CustomHeader>
-          <TouchableNativeFeedback onPress={() => setShow(true)}>
-            <View style={{ alignItems: "center", marginTop: 15 }} >
-              <CustomText style={{ fontWeight: "bold" }}>{dateObj.currentMonth}</CustomText>
-            </View>
 
-
-
-          </TouchableNativeFeedback>
-
-
-          <CustomCalenderStrip selectedDateString={dateObj.selectedDateString} />
+          <CustomCalenderStrip dateObj={dateObj} changeDate={changeDate} />
           <ListContainer data={data} />
           <AddButton onPress={() => addHisab()} name="Add Expense" style={{
             position: "absolute",
@@ -73,28 +70,7 @@ const Dashboard = ({ route }) => {
             bottom: 33
           }}></AddButton>
 
-          {show && <DateTimePicker
-            testID="dateTimePicker"
-            value={dateObj.date}
-            mode={'date'}
-            is24Hour={true}
-            display="default"
-            maximumDate={new Date(Date.now())}
-            onChange={(event, itemValue) => {
-              console.log(`${JSON.stringify(event)}`)
-              setShow(false)
 
-              if (event.type != 'dismissed') {
-                setDateObj({
-                  date: new Date(itemValue),
-                  currentMonth: formattedMonth(new Date(itemValue)),
-                  selectedDateString: formattedDate(new Date(itemValue))
-                });
-
-              }
-
-            }}
-          />}
         </View>
       }
     </>
