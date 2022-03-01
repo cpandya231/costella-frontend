@@ -49,9 +49,9 @@ const Dashboard = ({ route }) => {
     setLoading(false);
   }
 
-  const addHisab = () => {
+  const addExpense = () => {
 
-    navigation.navigate("AddHisabForm", { groupId, groupName, "groupItems": data });
+    navigation.navigate("AddExpenseForm", { groupId, groupName, "groupItems": data });
 
   }
 
@@ -64,7 +64,7 @@ const Dashboard = ({ route }) => {
 
           <CustomCalenderStrip dateObj={dateObj} changeDate={changeDate} />
           <ListContainer data={data} />
-          <AddButton onPress={() => addHisab()} name="Add Expense" style={{
+          <AddButton onPress={() => addExpense()} name="Add Expense" style={{
             position: "absolute",
             right: 26,
             bottom: 33

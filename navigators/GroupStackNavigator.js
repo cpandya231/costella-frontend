@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import GroupItem from "../components/GroupItem";
-import AddHisabForm from "../components/AddHisabForm";
+import AddExpenseForm from "../components/AddExpenseForm";
 import AddGroupForm from "../components/AddGroupForm";
 import Dashboard from "../components/Dashboard";
 import Group from "../components/Group";
@@ -16,7 +16,7 @@ const GroupStackNavigator = () => {
 
         <GroupStack.Screen name="Group" component={Group} options={{ title: 'My Groups' }} />
         <GroupStack.Screen name="GroupItem" component={GroupItem} />
-        <GroupStack.Screen name="AddHisabForm" component={AddHisabForm} />
+        <GroupStack.Screen name="AddExpenseForm" component={AddExpenseForm} />
         <GroupStack.Screen name="AddGroupForm" component={AddGroupForm} />
         <GroupStack.Screen name="Dashboard" component={Dashboard} />
 

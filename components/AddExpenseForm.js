@@ -14,7 +14,7 @@ import GeneralStyles from "../styles/GeneralStyles";
 
 
 
-export default function AddHisabForm({ route }) {
+export default function AddExpenseForm({ route }) {
     let navigation = useNavigation();
     const { groupName, groupId } = route.params;
     const [selectedCategory, setSelectedCategory] = useState("Grocery");
