@@ -7,13 +7,13 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 export default function CustomCalenderStrip(props) {
 
     const [show, setShow] = useState(false);
-
+    const [currentMonth, setCurrentMonth] = useState(props.dateObj.currentMonth)
 
     return (
         <>
             <TouchableNativeFeedback onPress={() => setShow(true)}>
                 <View style={{ alignItems: "center", marginTop: 15 }} >
-                    <CustomText style={{ fontWeight: "bold" }}>{props.dateObj.currentMonth}</CustomText>
+                    <CustomText style={{ fontWeight: "bold" }}>{currentMonth}</CustomText>
                 </View>
 
 
@@ -53,6 +53,7 @@ export default function CustomCalenderStrip(props) {
                     scrollerPaging={true}
                     selectedDate={props.dateObj.selectedDateString}
                     showMonth={false}
+                    maxDate={formattedDate(new Date(Date.now()))}
                     onDateSelected={(itemValue) => {
                         console.log(`Selected date ${formattedDate(new Date(itemValue))}`);
                         props.changeDate({
@@ -60,6 +61,11 @@ export default function CustomCalenderStrip(props) {
                             currentMonth: formattedMonth(new Date(itemValue)),
                             selectedDateString: formattedDate(new Date(itemValue))
                         });
+                    }}
+
+                    onWeekChanged={(start, end) => {
+
+                        setCurrentMonth(formattedMonth(new Date(end)))
                     }}
                 />
             </View>
