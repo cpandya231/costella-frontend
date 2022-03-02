@@ -7,7 +7,7 @@ import Circle from "./Circle";
 
 
 export default function Item(props) {
-
+  console.log(`Inside item ${JSON.stringify(props)} `)
   return (
     <View style={styles.item}>
       <Circle name={props.name} />
@@ -19,10 +19,11 @@ export default function Item(props) {
         />
       </View>
 
-
-      <CustomText style={styles.itemAmount}>{'\u20B9'}{props.amount}</CustomText>
-
-    </View>
+      <View style={styles.itemAmount}>
+        <CustomText style={{ color: "#000", textAlign: "right" }}>{'\u20B9'}{props.amount}</CustomText>
+        <Text style={{ fontSize: 12, fontFamily: "Noto Sans Light" }}>Created on: {props.purchaseDate}</Text>
+      </View>
+    </View >
   );
 }
 
@@ -30,7 +31,9 @@ const styles = StyleSheet.create({
   item: GeneralStyles.item,
   itemDetail: GeneralStyles.itemDetail,
   itemAmount: {
-    color: "#000",
+
+    justifyContent: "space-evenly",
+    height: 50
 
 
   },

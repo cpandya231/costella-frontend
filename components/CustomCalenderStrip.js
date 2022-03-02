@@ -8,17 +8,17 @@ export default function CustomCalenderStrip(props) {
 
     const [show, setShow] = useState(false);
     const [currentMonth, setCurrentMonth] = useState(props.dateObj.currentMonth)
-
+    console.log(`In CustomCalendarStrip currentMonth: ${props.dateObj.selectedDateString}`)
     return (
         <>
-            <TouchableNativeFeedback onPress={() => setShow(true)}>
+            {/* <TouchableNativeFeedback onPress={() => setShow(true)}>
                 <View style={{ alignItems: "center", marginTop: 15 }} >
-                    <CustomText style={{ fontWeight: "bold" }}>{currentMonth}</CustomText>
+                <CustomText style={{ fontWeight: "bold" }}>{currentMonth}</CustomText>
                 </View>
 
 
 
-            </TouchableNativeFeedback>
+            </TouchableNativeFeedback> */}
             {show && <DateTimePicker
                 testID="dateTimePicker"
                 value={props.dateObj.date}
@@ -31,7 +31,7 @@ export default function CustomCalenderStrip(props) {
                     setShow(false)
 
                     if (event.type != 'dismissed') {
-                        console.log(itemValue)
+
                         props.changeDate({
                             date: new Date(itemValue),
                             currentMonth: formattedMonth(new Date(itemValue)),
@@ -52,7 +52,9 @@ export default function CustomCalenderStrip(props) {
                     scrollable={true}
                     scrollerPaging={true}
                     selectedDate={props.dateObj.selectedDateString}
-                    showMonth={false}
+                    onHeaderSelected={(event) => setShow(true)}
+                    calendarHeaderStyle={{ fontWeight: "bold" }}
+                
                     maxDate={formattedDate(new Date(Date.now()))}
                     onDateSelected={(itemValue) => {
                         console.log(`Selected date ${formattedDate(new Date(itemValue))}`);
@@ -67,6 +69,8 @@ export default function CustomCalenderStrip(props) {
 
                         setCurrentMonth(formattedMonth(new Date(end)))
                     }}
+
+
                 />
             </View>
         </>

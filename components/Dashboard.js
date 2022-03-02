@@ -31,22 +31,23 @@ const Dashboard = ({ route }) => {
 
 
   useEffect(() => {
-    console.log(`Inside use effect ${dateObj.selectedDateString}`)
-    getGroupItems(dateObj.selectedDateString);
+
+    getGroupItems(dateObj);
   }, []);
 
 
   const changeDate = (dateObj) => {
+    console.log(`Inside change date ${JSON.stringify(dateObj)}`)
+    getGroupItems(dateObj);
 
-    getGroupItems(dateObj.selectedDateString);
-    setDateObj(dateObj);
   }
 
-  const getGroupItems = async (createdDate) => {
-    console.log("Getting group items");
-    let groupItems = await groupService.getGroupItem(route.params.groupId, createdDate);
+  const getGroupItems = async (dateObj) => {
+
+    let groupItems = await groupService.getGroupItem(route.params.groupId, dateObj.selectedDateString);
     setData(groupItems);
     setLoading(false);
+    setDateObj(dateObj);
   }
 
   const addExpense = () => {
@@ -63,7 +64,7 @@ const Dashboard = ({ route }) => {
           <CustomHeader>{groupName}</CustomHeader>
 
           <CustomCalenderStrip dateObj={dateObj} changeDate={changeDate} />
-          <ListContainer data={data} />
+          <ListContainer data={filteredDate(data, dateObj)} />
           <AddButton onPress={() => addExpense()} name="Add Expense" style={{
             position: "absolute",
             right: 26,
@@ -97,4 +98,12 @@ function formattedDate(date) {
 
 function formattedMonth(date) {
   return format(date, "MMM yyyy");
+}
+
+function filteredDate(data, dateObj) {
+
+  return data.filter(item => {
+
+    return item.purchaseDate == dateObj.selectedDateString
+  });
 }
