@@ -52,9 +52,9 @@ export const addGroup = async (body) => {
 }
 
 
-export const getGroupItem = async (groupId, createdDate) => {
+export const getGroupItem = async (groupId, createdDate, searchBy) => {
     const JWT_TOKEN = await getAccessJwtToken();
-    let itemUrl = `${url}item/${groupId}?createdDate=${createdDate}`;
+    let itemUrl = `${url}item/${groupId}?createdDate=${createdDate}&searchBy=${searchBy}`;
 
     const response = await fetch(itemUrl, {
         method: 'GET',

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Button } from "react-native";
 import * as React from "react";
 import CustomText from "./CustomText";
-export default function Home({ navigation }) {
+export default function Welcome({ navigation }) {
   React.useEffect(() => {
     setTimeout(() => navigation.navigate("Login"), 2000);
   }, [navigation]);
@@ -22,6 +22,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 48,
     height: 150,
-    fontWeight:"bold"
+    fontWeight: "bold"
   },
 });

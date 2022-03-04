@@ -4,7 +4,7 @@ import AddExpenseForm from "../components/AddExpenseForm";
 import AddGroupForm from "../components/AddGroupForm";
 import Dashboard from "../components/Dashboard";
 import Group from "../components/Group";
-import LineChart from "../components/LineChart"
+import LineChart from "../analytics/LineChart"
 const GroupStack = createNativeStackNavigator();
 
 const GroupStackNavigator = () => {
@@ -13,7 +13,7 @@ const GroupStackNavigator = () => {
         headerShown: false,
     }}>
 
-        <GroupStack.Screen name="LineChart" component={LineChart} />
+
         <GroupStack.Screen name="Group" component={Group} options={{ title: 'My Groups' }} />
         <GroupStack.Screen name="GroupItem" component={GroupItem} />
         <GroupStack.Screen name="AddExpenseForm" component={AddExpenseForm} />

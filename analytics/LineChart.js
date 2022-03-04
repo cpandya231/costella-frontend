@@ -1,10 +1,9 @@
 
-import { StyleSheet, Text, View, FlatList } from "react-native";
-import { Defs, LinearGradient, Stop } from "react-native-svg";
+import { StyleSheet, View } from "react-native";
 import {
   VictoryArea, VictoryAxis,
   VictoryChart, VictoryLabel, createContainer, VictoryTooltip,
-  VictoryScatter, VictoryZoomContainer, VictoryLine
+  VictoryScatter
 } from "victory-native";
 export default function LineChart(props) {
 
@@ -50,7 +49,7 @@ export default function LineChart(props) {
         <VictoryArea
 
 
-          data={data} x="week" y="expenses"
+          data={props.data} x="week" y="expenses"
           interpolation="natural"
           animate={{
             duration: 2000,

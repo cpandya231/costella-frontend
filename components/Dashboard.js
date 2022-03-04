@@ -44,7 +44,7 @@ const Dashboard = ({ route }) => {
 
   const getGroupItems = async (dateObj) => {
 
-    let groupItems = await groupService.getGroupItem(route.params.groupId, dateObj.selectedDateString);
+    let groupItems = await groupService.getGroupItem(route.params.groupId, dateObj.selectedDateString, "DATE");
     setData(groupItems);
     setLoading(false);
     setDateObj(dateObj);
