@@ -1,7 +1,11 @@
 
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { Defs, LinearGradient, Stop } from "react-native-svg";
-import { VictoryArea, VictoryAxis, VictoryChart, VictoryLabel, createContainer, VictoryTooltip, VictoryScatter } from "victory-native";
+import {
+  VictoryArea, VictoryAxis,
+  VictoryChart, VictoryLabel, createContainer, VictoryTooltip,
+  VictoryScatter, VictoryZoomContainer, VictoryLine
+} from "victory-native";
 export default function LineChart(props) {
 
   const data = [
@@ -25,7 +29,7 @@ export default function LineChart(props) {
 
           <VictoryBrushVoronoiContainer
             brushDimension="x"
-            brushDomain={{ x: [2.8, 3.2] }}
+            brushDomain={{ x: [3, 3.01], y: [0, 50] }}
             allowDrag={false}
             allowDraw={false}
             allowResize={false}
@@ -33,6 +37,10 @@ export default function LineChart(props) {
             labelComponent={
               <VictoryTooltip dy={-7} constrainToVisibleArea />
             }
+
+            brushStyle={{ stroke: "#11999E", strokeDasharray: "4, 8" }}
+
+
           />
 
         }
@@ -63,6 +71,9 @@ export default function LineChart(props) {
           ]}
 
           labels={({ datum }) => datum.expenses} />
+
+
+
         <VictoryAxis style={{
           axis: { stroke: "transparent" },
 
