@@ -3,19 +3,13 @@ import { StyleSheet, View } from "react-native";
 import {
   VictoryArea, VictoryAxis,
   VictoryChart, VictoryLabel, createContainer, VictoryTooltip,
-  VictoryScatter
+  VictoryScatter,
+  VictoryLine
 } from "victory-native";
 export default function LineChart(props) {
 
-  const data = [
-    { week: "Jan", expenses: 100 },
-    { week: "Feb", expenses: 200 },
-    { week: "Mar", expenses: 50 },
-    { week: "Apr", expenses: 300 },
-    { week: "May", expenses: 600 },
-    { week: "Jun", expenses: 200 }
 
-  ];
+
 
   const VictoryBrushVoronoiContainer = createContainer("brush", "voronoi");
 
@@ -23,12 +17,12 @@ export default function LineChart(props) {
     <View style={{ marginTop: 100 }}>
 
       <VictoryChart
-
+        domain={{ x: [1, 6] }}
         containerComponent={
 
           <VictoryBrushVoronoiContainer
             brushDimension="x"
-            brushDomain={{ x: [3, 3.01], y: [0, 50] }}
+            brushDomain={getBrushDomain(props.data.selectedItem)}
             allowDrag={false}
             allowDraw={false}
             allowResize={false}
@@ -49,7 +43,7 @@ export default function LineChart(props) {
         <VictoryArea
 
 
-          data={props.data} x="week" y="expenses"
+          data={props.data.weeks} x="week" y="expenses"
           interpolation="natural"
           animate={{
             duration: 2000,
@@ -64,24 +58,26 @@ export default function LineChart(props) {
           style={{ data: { fill: "#11999E" } }}
           size={7}
           x="week" y="expenses"
-          data={[
-            { week: "Mar", expenses: 50 },
-
-          ]}
+          data={props.data.selectedItem}
 
           labels={({ datum }) => datum.expenses} />
 
 
 
+
+        {/* 
         <VictoryAxis style={{
           axis: { stroke: "transparent" },
 
 
-        }} />
+        }}
+
+        /> */}
       </VictoryChart>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -96,3 +92,11 @@ const styles = StyleSheet.create({
 
   },
 });
+
+
+function getBrushDomain(selectedItem) {
+  console.log(`${JSON.stringify(selectedItem[0].expenses)}`);
+  let week = parseInt(selectedItem[0].week.split(" ")[1]) + 1;
+  console.log(week)
+  return { x: [week, week + 0.01], y: [0, selectedItem[0].expenses] }
+}

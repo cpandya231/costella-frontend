@@ -14,6 +14,7 @@ const AnalyticsDashboard = ({ route }) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [groupId, setGroupId] = useState("g_f699495c-5e96-4caf-a96b-9efd5fae7247");
+  const [selectedDate, setSelectedDate] = useState("2022-03-06");
   useEffect(() => {
     getGroupItems();
   }, []);
@@ -21,32 +22,33 @@ const AnalyticsDashboard = ({ route }) => {
 
   const getGroupItems = async (dateObj) => {
 
-    let groupItems = await groupService.getGroupItem(groupId, "2022-02-04", "MONTH");
-    console.log(`groupItems : ${JSON.stringify(groupItems)} in analytics`)
-    const groups = groupItems.reduce((previous, current = []) => {
-      console.log(`Acc :${JSON.stringify(previous)}`)
-      // create a composed key: 'year-week' 
-      const week = `${moment(current["purchaseDate"]).week()}`;
-      console.log(`Week num :${week}`)
-      // add this key as a property to the result object
+    let groupItems = await groupService.getGroupItem(groupId, selectedDate, "MONTH");
 
-      let aggrgatedItem = previous.filter((itemToFilter) => itemToFilter["week"] == week)[0]
-      console.log(`aggrgatedItem :${JSON.stringify(aggrgatedItem)}`)
-      if (aggrgatedItem == undefined) {
-        aggrgatedItem = { "week": week, "expenses": parseInt(current["amount"]) };
-        previous.push(aggrgatedItem);
-      } else {
-        aggrgatedItem["expenses"] = aggrgatedItem["expenses"] + parseInt(current["amount"]);
+    const groups = [];
+    let weekOfSelectedDate = getWeekOfMonth(selectedDate);
+    for (let i = 0; i < 6; i++) {
+      let week = `Week ${i}`;
+      let initialItem = { "week": week, "expenses": 0, "weekOfSelectedDate": false };
+      if (week == weekOfSelectedDate) {
+        initialItem["weekOfSelectedDate"] = true;
       }
+      groups.push(initialItem);
+    }
 
-      // push the current date that belongs to the year-week calculated befor
 
+    let reducedItems = groupItems.reduce((previous, current = []) => {
+      const week = getWeekOfMonth(current["purchaseDate"]);
+      let aggrgatedItem = previous.filter((itemToFilter) => itemToFilter["week"] == week)[0]
+      aggrgatedItem["expenses"] = aggrgatedItem["expenses"] + parseInt(current["amount"]);
 
       return previous;
 
-    }, []);
+    }, groups);
 
-    console.log(`Grouped items :${JSON.stringify(groups)}`)
+    let selectedItem = (groups.filter((item) => item["weekOfSelectedDate"]));
+
+
+    setData({ "weeks": groups, "selectedItem": selectedItem })
     setLoading(false);
 
   }
@@ -74,6 +76,13 @@ const styles = StyleSheet.create({
 
 function formattedDate(date) {
   return format(date, "yyyy-MM-dd")
+}
+
+function getWeekOfMonth(dateStr) {
+  let date = new Date(dateStr);
+  let adjustedDate = date.getDate() + date.getDay();
+  let prefixes = ['0', '1', '2', '3', '4', '5'];
+  return "Week " + (parseInt(prefixes[0 | adjustedDate / 7]) + 1);
 }
 
 export default AnalyticsDashboard;
