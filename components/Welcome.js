@@ -1,15 +1,26 @@
 import { StyleSheet, Text, View, Button } from "react-native";
 import * as React from "react";
 import CustomText from "./CustomText";
+import { Auth } from "aws-amplify";
+
 export default function Welcome({ navigation }) {
   React.useEffect(() => {
-    setTimeout(() => navigation.navigate("Login"), 2000);
+    setTimeout(() => navigateBasedOnAuthentication(), 2000);
   }, [navigation]);
   return (
     <View style={styles.container}>
       <CustomText style={styles.text}>Costella</CustomText>
     </View>
   );
+
+  function navigateBasedOnAuthentication() {
+    Auth.currentAuthenticatedUser().then(loggedInUser => {
+      navigation.navigate("TabNavigator");
+    }).catch(err => {
+      console.log("User has not logged in");
+      navigation.navigate("SplashScreenNavigator");
+    });
+  }
 }
 
 const styles = StyleSheet.create({
