@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+const win = Dimensions.get('window');
 export default GeneralStyles = {
     item: {
         height: 100,
@@ -31,6 +32,13 @@ export default GeneralStyles = {
     },
     error: {
         color: "red"
+    },
+    splashScreenImage: {
+        flex: 2,
+        alignSelf: 'stretch',
+        width: win.width,
+        height: win.height,
+
     }
 };
 

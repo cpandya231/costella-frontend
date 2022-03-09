@@ -3,7 +3,8 @@ import * as React from "react";
 import CustomText from "../CustomText";
 import AddButton from "../AddButton";
 import { SvgUri } from "react-native-svg";
-
+import GeneralStyles from "../../styles/GeneralStyles";
+import CustomHeader from "../CustomHeader";
 
 export default function SplashScreenOne({ navigation }) {
 
@@ -12,27 +13,19 @@ export default function SplashScreenOne({ navigation }) {
 
     <View style={styles.container}>
 
-      <View style={{
-        flex: 2,
+      <Image
+        source={require("../../assets/Splashscreen-1.png")}
+        style={styles.splashScreenImage}
+      />
 
-
-      }}><Image
-          source={require("../../assets/Splashscreen-1.png")}
-          style={{
-            flex: 1,
-            alignSelf: 'center',
-
-          }}
-        />
-      </View>
 
 
       <View style={{
         flex: 1,
-
-
+        justifyContent: "flex-start",
+        alignItems: "center"
       }}>
-        <CustomText>Track your expenses easily</CustomText>
+        <CustomHeader>Track your expenses easily</CustomHeader>
         <AddButton onPress={() => navigation.navigate("Splash-2")} name="Next" style={styles.addButtom}></AddButton>
       </View>
 
@@ -52,6 +45,8 @@ const styles = StyleSheet.create({
     right: 26,
     bottom: 33,
 
-  }
+  },
+  splashScreenImage: GeneralStyles.splashScreenImage
+
 
 });
