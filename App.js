@@ -9,6 +9,9 @@ import TabNavigator from "./navigators/TabNavigator";
 import CustomText from "./components/CustomText";
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs(true);
 
 
 const prefix = Linking.createURL("/");
@@ -40,7 +43,7 @@ Amplify.configure({
 });
 
 
-console.log(`In App.js ${prefix}`)
+
 const config = {
   screens: {
     TabNavigator: {
