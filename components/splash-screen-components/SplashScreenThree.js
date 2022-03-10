@@ -21,8 +21,9 @@ export default function SplashScreenThree({ navigation }) {
         justifyContent: "flex-start",
         alignItems: "center"
       }}>
-        <CustomHeader>Visualize with our
-          advanced analytics</CustomHeader>
+
+        <CustomText style={styles.splashScreenText}>Visualize with our
+          advanced analytics</CustomText>
         <AddButton onPress={() => navigation.navigate("Login")} name="Get Started" style={styles.addButtom}></AddButton>
       </View>
     </View >
@@ -42,6 +43,6 @@ const styles = StyleSheet.create({
     bottom: 33,
 
   },
-  splashScreenImage: GeneralStyles.splashScreenImage
-
+  splashScreenImage: GeneralStyles.splashScreenImage,
+  splashScreenText: GeneralStyles.splashScreenText
 });

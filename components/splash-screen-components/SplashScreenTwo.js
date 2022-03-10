@@ -1,9 +1,11 @@
-import { Dimensions, Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import * as React from "react";
 import CustomText from "../CustomText";
-import AddButton from "../AddButton";
 import GeneralStyles from "../../styles/GeneralStyles";
-import CustomHeader from "../CustomHeader";
+import NextButton from "../NextButton";
+import SplashScreenTwoSVG from "../../assets/Splashscreen-2.svg"
+import { TouchableHighlight } from "react-native-gesture-handler";
+import SkipOrNext from "./SkipOrNext";
 export default function SplashScreenTwo({ navigation }) {
 
   return (
@@ -13,14 +15,18 @@ export default function SplashScreenTwo({ navigation }) {
         source={require("../../assets/Splashscreen-2.png")}
         style={styles.splashScreenImage}
       />
+
+
       <View style={{
         flex: 1,
         justifyContent: "flex-start",
         alignItems: "center"
       }}>
-        <CustomHeader>Create different groups
-          and split your expenses</CustomHeader>
-        <AddButton onPress={() => navigation.navigate("Splash-3")} name="Next" style={styles.addButtom}></AddButton>
+
+        <CustomText style={styles.splashScreenText}>Create different groups
+          and split your expenses</CustomText>
+        <SkipOrNext screenName="Splash-3" />
+
       </View>
     </View >
   );
@@ -38,6 +44,7 @@ const styles = StyleSheet.create({
     bottom: 33,
 
   },
-  splashScreenImage: GeneralStyles.splashScreenImage
+  splashScreenImage: GeneralStyles.splashScreenImage,
+  splashScreenText: GeneralStyles.splashScreenText
 
 });

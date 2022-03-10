@@ -1,14 +1,15 @@
-import { Image, StyleSheet, View, Dimensions } from "react-native";
+import { Image, StyleSheet, View, Dimensions, TouchableNativeFeedback } from "react-native";
 import * as React from "react";
 import CustomText from "../CustomText";
-import AddButton from "../AddButton";
-import { SvgUri } from "react-native-svg";
 import GeneralStyles from "../../styles/GeneralStyles";
-import CustomHeader from "../CustomHeader";
+import NextButton from "../NextButton";
+import skipOrNext from "./SkipOrNext";
+import SkipOrNext from "./SkipOrNext";
 
+const win = Dimensions.get('window');
 export default function SplashScreenOne({ navigation }) {
 
-  const win = Dimensions.get('window');
+
   return (
 
     <View style={styles.container}>
@@ -18,6 +19,7 @@ export default function SplashScreenOne({ navigation }) {
         style={styles.splashScreenImage}
       />
 
+      {/* <SplashScreenOneSVG /> */}
 
 
       <View style={{
@@ -25,8 +27,8 @@ export default function SplashScreenOne({ navigation }) {
         justifyContent: "flex-start",
         alignItems: "center"
       }}>
-        <CustomHeader>Track your expenses easily</CustomHeader>
-        <AddButton onPress={() => navigation.navigate("Splash-2")} name="Next" style={styles.addButtom}></AddButton>
+        <CustomText style={styles.splashScreenText}>Costella helps you track your expenses easily</CustomText>
+        <SkipOrNext screenName="Splash-2" />
       </View>
 
     </View >
@@ -40,13 +42,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
 
   },
-  addButtom: {
-    position: "absolute",
-    right: 26,
-    bottom: 33,
+
+  skipOrNext: {
+
+    flex: 1,
+    width: "80%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
 
   },
-  splashScreenImage: GeneralStyles.splashScreenImage
-
+  splashScreenImage: GeneralStyles.splashScreenImage,
+  splashScreenText: GeneralStyles.splashScreenText
 
 });

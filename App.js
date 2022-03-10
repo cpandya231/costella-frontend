@@ -61,6 +61,7 @@ const App = () => {
 
   let [fontsLoaded] = useFonts({
     'Noto Sans': require('./assets/fonts/NotoSansDisplay-Regular.ttf'),
+    'Noto Sans Bold': require('./assets/fonts/NotoSansDisplay-Bold.ttf'),
     'Noto Sans Light': require('./assets/fonts/NotoSansDisplay-Light.ttf'),
 
   });

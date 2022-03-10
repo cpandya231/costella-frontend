@@ -1,10 +1,10 @@
-<svg width="397" height="429" viewBox="0 0 397 429" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<path d="M397 296.909C260.636 409.422 90.1818 348.598 22 304.122V0H397V296.909Z" fill="#11999E"/>
-<rect y="141" width="292" height="239" fill="url(#pattern0)"/>
-<rect x="159" y="36" width="230" height="393" fill="url(#pattern1)"/>
+<svg width="375" height="429" viewBox="0 0 375 429" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<path d="M375 296.909C238.636 409.422 68.1818 348.598 0 304.122V0H375V296.909Z" fill="#11999E"/>
+<rect y="141" width="270" height="239" fill="url(#pattern0)"/>
+<rect x="137" y="36" width="230" height="393" fill="url(#pattern1)"/>
 <defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image0_102_2" transform="translate(0.0907534) scale(0.000897471 0.00109649)"/>
+<use xlink:href="#image0_102_2" transform="translate(0.0574074) scale(0.000970598 0.00109649)"/>
 </pattern>
 <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image1_102_2" transform="translate(0 0.0968728) scale(0.00151057 0.000884051)"/>

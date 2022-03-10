@@ -39,6 +39,17 @@ export default GeneralStyles = {
         width: win.width,
         height: win.height,
 
+    },
+    splashScreenText: { fontFamily: 'Noto Sans Bold', fontSize: 24, textAlign: 'center', padding: 10 }
+    ,
+    circle: {
+        borderRadius: 50,
+        width: 48,
+        height: 48,
+        backgroundColor: '#E4F9F5',
+        alignItems: "center",
+        justifyContent: "center"
     }
+
 };
 
