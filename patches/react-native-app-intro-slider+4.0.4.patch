@@ -1,0 +1,119 @@
+diff --git a/node_modules/react-native-app-intro-slider/dist/index.js b/node_modules/react-native-app-intro-slider/dist/index.js
+index 0935c97..9eae64d 100644
+--- a/node_modules/react-native-app-intro-slider/dist/index.js
++++ b/node_modules/react-native-app-intro-slider/dist/index.js
+@@ -55,8 +55,8 @@ class AppIntroSlider extends React.Component {
+                         ? styles.transparentBottomButton
+                         : styles.bottomButton,
+                 ]}>
+-          {content}
+-        </react_native_1.View>);
++                    {content}
++                </react_native_1.View>);
+             }
+             return content;
+         };
+@@ -65,10 +65,10 @@ class AppIntroSlider extends React.Component {
+                 ? styles.leftButtonContainer
+                 : styles.rightButtonContainer;
+             return (<react_native_1.View style={!this.props.bottomButton && style}>
+-        <react_native_1.TouchableOpacity onPress={onPress} style={this.props.bottomButton && styles.flexOne}>
+-          {content}
+-        </react_native_1.TouchableOpacity>
+-      </react_native_1.View>);
++                <react_native_1.TouchableOpacity onPress={onPress} style={this.props.bottomButton && styles.flexOne}>
++                    {content}
++                </react_native_1.TouchableOpacity>
++            </react_native_1.View>);
+         };
+         this._renderNextButton = () => this.props.showNextButton &&
+             this._renderButton('Next', this.props.nextLabel, () => this.goToSlide(this.state.activeIndex + 1, true), this.props.renderNextButton);
+@@ -77,8 +77,8 @@ class AppIntroSlider extends React.Component {
+         this._renderDoneButton = () => this.props.showDoneButton &&
+             this._renderButton('Done', this.props.doneLabel, this.props.onDone, this.props.renderDoneButton);
+         this._renderSkipButton = () =>
+-        // scrollToEnd does not work in RTL so use goToSlide instead
+-        this.props.showSkipButton &&
++            // scrollToEnd does not work in RTL so use goToSlide instead
++            this.props.showSkipButton &&
+             this._renderButton('Skip', this.props.skipLabel, () => this.props.onSkip
+                 ? this.props.onSkip()
+                 : this.goToSlide(this.props.data.length - 1), this.props.renderSkipButton);
+@@ -91,25 +91,25 @@ class AppIntroSlider extends React.Component {
+                 ? this._renderDoneButton()
+                 : this._renderNextButton();
+             return (<react_native_1.View style={styles.paginationContainer}>
+-        <react_native_1.SafeAreaView>
+-          <react_native_1.View style={styles.paginationDots}>
+-            {this.props.data.length > 1 &&
+-                this.props.data.map((_, i) => this.props.dotClickEnabled ? (<react_native_1.TouchableOpacity key={i} style={[
+-                    styles.dot,
+-                    this._rtlSafeIndex(i) === this.state.activeIndex
+-                        ? this.props.activeDotStyle
+-                        : this.props.dotStyle,
+-                ]} onPress={() => this.goToSlide(i, true)}/>) : (<react_native_1.View key={i} style={[
+-                    styles.dot,
+-                    this._rtlSafeIndex(i) === this.state.activeIndex
+-                        ? this.props.activeDotStyle
+-                        : this.props.dotStyle,
+-                ]}/>))}
+-          </react_native_1.View>
+-          {primaryButton}
+-          {secondaryButton}
+-        </react_native_1.SafeAreaView>
+-      </react_native_1.View>);
++                <react_native_1.SafeAreaView>
++                    <react_native_1.View style={styles.paginationDots}>
++                        {this.props.data.length > 1 &&
++                            this.props.data.map((_, i) => this.props.dotClickEnabled ? (<react_native_1.TouchableOpacity key={i} style={[
++                                styles.dot,
++                                this._rtlSafeIndex(i) === this.state.activeIndex
++                                    ? this.props.activeDotStyle
++                                    : this.props.dotStyle,
++                            ]} onPress={() => this.goToSlide(i, true)} />) : (<react_native_1.View key={i} style={[
++                                styles.dot,
++                                this._rtlSafeIndex(i) === this.state.activeIndex
++                                    ? this.props.activeDotStyle
++                                    : this.props.dotStyle,
++                            ]} />))}
++                    </react_native_1.View>
++                    {primaryButton}
++                    {secondaryButton}
++                </react_native_1.SafeAreaView>
++            </react_native_1.View>);
+         };
+         this._onMomentumScrollEnd = (e) => {
+             const offset = e.nativeEvent.contentOffset.x;
+@@ -150,13 +150,17 @@ class AppIntroSlider extends React.Component {
+         // Merge component width and user-defined extraData
+         const extra = merge_extradata_1.default(extraData, this.state.width);
+         return (<react_native_1.View style={styles.flexOne}>
+-        <react_native_1.FlatList ref={(ref) => (this.flatList = ref)} data={this.props.data} horizontal pagingEnabled showsHorizontalScrollIndicator={false} bounces={false} style={styles.flatList} renderItem={this._renderItem} onMomentumScrollEnd={this._onMomentumScrollEnd} extraData={extra} onLayout={this._onLayout} 
+-        // make sure all slides are rendered so we can use dots to navigate to them
+-        initialNumToRender={data.length} {...otherProps}/>
+-        {renderPagination
+-            ? renderPagination(this.state.activeIndex)
+-            : this._renderPagination()}
+-      </react_native_1.View>);
++            <react_native_1.FlatList
++                ref={(ref) => (this.flatList = ref)}
++                data={this.props.data} horizontal
++                pagingEnabled showsHorizontalScrollIndicator={false}
++                bounces={false} style={styles.flatList} renderItem={this._renderItem} onMomentumScrollEnd={this._onMomentumScrollEnd} extraData={extra} onLayout={this._onLayout}
++                // make sure all slides are rendered so we can use dots to navigate to them
++                initialNumToRender={data.length} {...otherProps} />
++            {renderPagination
++                ? renderPagination(this.state.activeIndex)
++                : this._renderPagination()}
++        </react_native_1.View>);
+     }
+ }
+ exports.default = AppIntroSlider;
+@@ -181,6 +185,7 @@ AppIntroSlider.defaultProps = {
+ const styles = react_native_1.StyleSheet.create({
+     flexOne: {
+         flex: 1,
++
+     },
+     flatList: {
+         flex: 1,
