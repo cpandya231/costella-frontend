@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-app-intro-slider/dist/index.js b/node_modules/react-native-app-intro-slider/dist/index.js
-index 0935c97..9eae64d 100644
+index 0935c97..ab39fa7 100644
 --- a/node_modules/react-native-app-intro-slider/dist/index.js
 +++ b/node_modules/react-native-app-intro-slider/dist/index.js
 @@ -55,8 +55,8 @@ class AppIntroSlider extends React.Component {
@@ -39,7 +39,7 @@ index 0935c97..9eae64d 100644
              this._renderButton('Skip', this.props.skipLabel, () => this.props.onSkip
                  ? this.props.onSkip()
                  : this.goToSlide(this.props.data.length - 1), this.props.renderSkipButton);
-@@ -91,25 +91,25 @@ class AppIntroSlider extends React.Component {
+@@ -91,25 +91,28 @@ class AppIntroSlider extends React.Component {
                  ? this._renderDoneButton()
                  : this._renderNextButton();
              return (<react_native_1.View style={styles.paginationContainer}>
@@ -62,7 +62,8 @@ index 0935c97..9eae64d 100644
 -          {secondaryButton}
 -        </react_native_1.SafeAreaView>
 -      </react_native_1.View>);
-+                <react_native_1.SafeAreaView>
++
++                <react_native_1.SafeAreaView style={{ justifyContent: "space-between" }}>
 +                    <react_native_1.View style={styles.paginationDots}>
 +                        {this.props.data.length > 1 &&
 +                            this.props.data.map((_, i) => this.props.dotClickEnabled ? (<react_native_1.TouchableOpacity key={i} style={[
@@ -77,14 +78,16 @@ index 0935c97..9eae64d 100644
 +                                    : this.props.dotStyle,
 +                            ]} />))}
 +                    </react_native_1.View>
-+                    {primaryButton}
-+                    {secondaryButton}
++                    <react_native_1.View style={{ flexDirection: "row-reverse", justifyContent: "space-between", }}>
++                        {primaryButton}
++                        {secondaryButton}
++                    </react_native_1.View>
 +                </react_native_1.SafeAreaView>
 +            </react_native_1.View>);
          };
          this._onMomentumScrollEnd = (e) => {
              const offset = e.nativeEvent.contentOffset.x;
-@@ -150,13 +150,17 @@ class AppIntroSlider extends React.Component {
+@@ -150,13 +153,17 @@ class AppIntroSlider extends React.Component {
          // Merge component width and user-defined extraData
          const extra = merge_extradata_1.default(extraData, this.state.width);
          return (<react_native_1.View style={styles.flexOne}>
@@ -109,7 +112,7 @@ index 0935c97..9eae64d 100644
      }
  }
  exports.default = AppIntroSlider;
-@@ -181,6 +185,7 @@ AppIntroSlider.defaultProps = {
+@@ -181,6 +188,7 @@ AppIntroSlider.defaultProps = {
  const styles = react_native_1.StyleSheet.create({
      flexOne: {
          flex: 1,
@@ -117,3 +120,13 @@ index 0935c97..9eae64d 100644
      },
      flatList: {
          flex: 1,
+@@ -191,7 +199,9 @@ const styles = react_native_1.StyleSheet.create({
+         bottom: 16,
+         left: 16,
+         right: 16,
++
+         justifyContent: 'center',
++
+     },
+     paginationDots: {
+         height: 16,

@@ -80,6 +80,7 @@ export default function SplashScreenParent({ navigation }) {
 
             backgroundColor: "rgba(17,153,158,0.3)"
         }}
+        bottomButton={true}
 
     />;
 }
