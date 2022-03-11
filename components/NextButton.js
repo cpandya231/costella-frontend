@@ -9,16 +9,16 @@ import Arrow from "../assets/RightArrow.svg"
 export default function NextButton(props) {
 
   return (
-    <TouchableNativeFeedback
+    // <TouchableNativeFeedback
 
-      onPress={() => props.onPress()}
-    >
-      <View style={StyleSheet.compose([styles.NextButton, props.style])}>
-        <Arrow />
-      </View>
+    //   onPress={() => props.onPress()}
+    // >
+    <View style={StyleSheet.compose([styles.NextButton, props.style])}>
+      <Arrow />
+    </View>
 
 
-    </TouchableNativeFeedback>
+    // </TouchableNativeFeedback>
 
   );
 }
@@ -32,9 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#11999E",
     alignItems: "center",
     justifyContent: "center",
-    // position: "absolute",
-    // right: 26,
-    // bottom: 33,
+
     elevation: 5,
 
   }

@@ -34,10 +34,10 @@ export default GeneralStyles = {
         color: "red"
     },
     splashScreenImage: {
-        flex: 2,
-        alignSelf: 'stretch',
+
+
         width: win.width,
-        height: win.height,
+
 
     },
     splashScreenText: { fontFamily: 'Noto Sans Bold', fontSize: 24, textAlign: 'center', padding: 10 }

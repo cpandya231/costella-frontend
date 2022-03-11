@@ -3,6 +3,7 @@ import SplashScreenOne from "../components/splash-screen-components/SplashScreen
 import SplashScreenTwo from "../components/splash-screen-components/SplashScreenTwo";
 import SplashScreenThree from "../components/splash-screen-components/SplashScreenThree";
 import Login from "../components/Login";
+import SplashScreenParent from "../components/splash-screen-components/SplashScreenParent";
 const SplashScreenStack = createNativeStackNavigator();
 
 const SplashScreenStackNavigator = () => {
@@ -12,9 +13,10 @@ const SplashScreenStackNavigator = () => {
     }}>
 
 
-        <SplashScreenStack.Screen name="Splash-1" component={SplashScreenOne} />
+        {/* <SplashScreenStack.Screen name="Splash-1" component={SplashScreenOne} />
         <SplashScreenStack.Screen name="Splash-2" component={SplashScreenTwo} />
-        <SplashScreenStack.Screen name="Splash-3" component={SplashScreenThree} />
+        <SplashScreenStack.Screen name="Splash-3" component={SplashScreenThree} /> */}
+        <SplashScreenStack.Screen name="Splash" component={SplashScreenParent} />
         <SplashScreenStack.Screen name="Login" component={Login} />
 
 
