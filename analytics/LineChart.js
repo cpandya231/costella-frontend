@@ -1,11 +1,11 @@
 
 import { StyleSheet, View } from "react-native";
 import {
-  VictoryArea, VictoryAxis,
-  VictoryChart, VictoryLabel, createContainer, VictoryTooltip,
-  VictoryScatter,
-  VictoryLine
+  VictoryArea, VictoryChart, VictoryLabel, createContainer, VictoryTooltip,
+  VictoryScatter
 } from "victory-native";
+
+
 export default function LineChart(props) {
 
 
@@ -15,6 +15,7 @@ export default function LineChart(props) {
 
   return (
     <View style={{ marginTop: 100 }}>
+
 
       <VictoryChart
         domain={{ x: [1, 6] }}
@@ -95,8 +96,8 @@ const styles = StyleSheet.create({
 
 
 function getBrushDomain(selectedItem) {
-  console.log(`${JSON.stringify(selectedItem[0].expenses)}`);
+
   let week = parseInt(selectedItem[0].week.split(" ")[1]) + 1;
-  console.log(week)
+
   return { x: [week, week + 0.01], y: [0, selectedItem[0].expenses] }
 }

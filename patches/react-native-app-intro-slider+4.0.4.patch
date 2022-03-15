@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-app-intro-slider/dist/index.js b/node_modules/react-native-app-intro-slider/dist/index.js
-index 0935c97..ab39fa7 100644
+index 0935c97..f314683 100644
 --- a/node_modules/react-native-app-intro-slider/dist/index.js
 +++ b/node_modules/react-native-app-intro-slider/dist/index.js
 @@ -55,8 +55,8 @@ class AppIntroSlider extends React.Component {
@@ -124,7 +124,7 @@ index 0935c97..ab39fa7 100644
          bottom: 16,
          left: 16,
          right: 16,
-+
++        padding: 10,
          justifyContent: 'center',
 +
      },

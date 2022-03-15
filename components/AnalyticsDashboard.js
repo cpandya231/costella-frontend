@@ -1,22 +1,35 @@
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import {
-  StyleSheet
+  StyleSheet, View
 } from "react-native";
-import { View } from "react-native-web";
 import LineChart from "../analytics/LineChart";
 import CustomText from "./CustomText";
-import moment from 'moment';
 
 import * as groupService from "../services/GroupService"
+
+import { Auth } from "aws-amplify";
+import CustomHeader from "./CustomHeader";
+import moment from 'moment';
+
 
 const AnalyticsDashboard = ({ route }) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [groupId, setGroupId] = useState("g_f699495c-5e96-4caf-a96b-9efd5fae7247");
   const [selectedDate, setSelectedDate] = useState("2022-03-06");
+  const [name, setName] = useState("");
+  const [totalExpenses, setTotalExpenses] = useState(0);
   useEffect(() => {
+    Auth.currentAuthenticatedUser().then(loggedInUser => {
+
+      setName(loggedInUser.attributes.name)
+    }).catch(err => {
+      console.log("User has not logged in")
+    })
+
     getGroupItems();
+
   }, []);
 
 
@@ -37,6 +50,7 @@ const AnalyticsDashboard = ({ route }) => {
 
 
     let reducedItems = groupItems.reduce((previous, current = []) => {
+
       const week = getWeekOfMonth(current["purchaseDate"]);
       let aggrgatedItem = previous.filter((itemToFilter) => itemToFilter["week"] == week)[0]
       aggrgatedItem["expenses"] = aggrgatedItem["expenses"] + parseInt(current["amount"]);
@@ -47,18 +61,25 @@ const AnalyticsDashboard = ({ route }) => {
 
     let selectedItem = (groups.filter((item) => item["weekOfSelectedDate"]));
 
+    console.log(JSON.stringify(groups));
+    let totalExpenses = 0;
+    groups.forEach((item, index) => totalExpenses += item["expenses"]);
 
     setData({ "weeks": groups, "selectedItem": selectedItem })
+    setTotalExpenses(totalExpenses);
     setLoading(false);
-
   }
 
   return (
 
-    <>
+    <View style={styles.container}>
       {isLoading ? <CustomText>Loading Groups...</CustomText> :
-        <LineChart data={data} />}
-    </>
+        <>
+          <CustomHeader>Hi {name}!</CustomHeader>
+          <CustomText style={styles.expensesText}>Your {getMonthName(selectedDate)} expenses {'\u20B9'}{totalExpenses}</CustomText>
+          <LineChart data={data} /></>
+      }
+    </View>
   );
 };
 
@@ -70,6 +91,9 @@ const styles = StyleSheet.create({
 
 
   },
+  expensesText: {
+    textAlign: "center"
+  }
 
 
 });
@@ -83,6 +107,11 @@ function getWeekOfMonth(dateStr) {
   let adjustedDate = date.getDate() + date.getDay();
   let prefixes = ['0', '1', '2', '3', '4', '5'];
   return "Week " + (parseInt(prefixes[0 | adjustedDate / 7]) + 1);
+}
+
+function getMonthName(dateStr) {
+  var check = moment(dateStr, 'YYYY-MM-DD');
+  return check.format("MMMM");
 }
 
 export default AnalyticsDashboard;

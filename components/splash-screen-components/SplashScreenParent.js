@@ -92,15 +92,6 @@ const styles = StyleSheet.create({
 
     },
 
-    skipOrNext: {
-
-        flex: 1,
-        width: "80%",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-
-    },
     splashScreenImage: GeneralStyles.splashScreenImage,
     splashScreenText: GeneralStyles.splashScreenText
 

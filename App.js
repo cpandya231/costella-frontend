@@ -52,7 +52,13 @@ const config = {
         Group: "loginCallback",
       }
     },
-    Login: "logoutCallback",
+    SplashScreenNavigator: {
+
+      screens: {
+        Login: "logoutCallback",
+      }
+    },
+
     NotFound: "*",
   }
 }
