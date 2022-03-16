@@ -7,7 +7,7 @@ import Circle from "./Circle";
 
 
 export default function Item(props) {
-  console.log(`Inside item ${JSON.stringify(props)} `)
+
   return (
     <View style={styles.item}>
       <Circle name={props.name} />

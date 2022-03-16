@@ -2,7 +2,8 @@
 import { StyleSheet, View } from "react-native";
 import {
   VictoryArea, VictoryChart, VictoryLabel, createContainer, VictoryTooltip,
-  VictoryScatter
+  VictoryScatter,
+  VictoryAxis
 } from "victory-native";
 
 
@@ -14,11 +15,11 @@ export default function LineChart(props) {
   const VictoryBrushVoronoiContainer = createContainer("brush", "voronoi");
 
   return (
-    <View style={{ marginTop: 100 }}>
+    <View style={{ marginTop: 40, position: "relative" }}>
 
 
       <VictoryChart
-        domain={{ x: [1, 6] }}
+        domain={{ x: [2, 5] }}
         containerComponent={
 
           <VictoryBrushVoronoiContainer
@@ -51,7 +52,7 @@ export default function LineChart(props) {
             onLoad: { duration: 1000 }
           }}
           style={{ data: { stroke: "#11999E", strokeWidth: 2, strokeLinecap: "round", fill: '#E4F9F5' } }}
-          labelComponent={<VictoryLabel renderInPortal dy={-20} />}
+          labelComponent={<VictoryLabel dy={-20} />}
 
         />
 
@@ -66,14 +67,18 @@ export default function LineChart(props) {
 
 
 
-        {/* 
-        <VictoryAxis style={{
-          axis: { stroke: "transparent" },
 
 
-        }}
 
-        /> */}
+        <VictoryAxis crossAxis
+
+          style={{
+            axis: { stroke: "transparent" },
+            tickLabels: { marginTop: 8, fontFamily: "Noto Sans Bold", fill: "#C4C4C4" }
+
+          }}
+          fixLabelOverlap={true}
+        />
       </VictoryChart>
     </View>
   );

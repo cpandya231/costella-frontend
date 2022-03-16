@@ -64,7 +64,7 @@ const Dashboard = ({ route }) => {
           <CustomHeader>{groupName}</CustomHeader>
 
           <CustomCalenderStrip dateObj={dateObj} changeDate={changeDate} />
-          <ListContainer data={filteredDate(data, dateObj)} />
+          <ListContainer data={filteredData(data, dateObj)} />
           <AddButton onPress={() => addExpense()} name="Add Expense" style={{
             position: "absolute",
             right: 26,
@@ -100,7 +100,7 @@ function formattedMonth(date) {
   return format(date, "MMM yyyy");
 }
 
-function filteredDate(data, dateObj) {
+function filteredData(data, dateObj) {
 
   return data.filter(item => {
 

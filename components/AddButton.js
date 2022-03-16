@@ -14,7 +14,7 @@ export default function AddButton(props) {
       onPress={() => props.onPress()}
     >
       <View style={StyleSheet.compose([styles.addButton, props.style])}>
-        <CustomText style={StyleSheet.compose([styles.addButtonText])}>{props.name}</CustomText>
+        <CustomText style={StyleSheet.compose([styles.addButtonText, props.textStyle])}>{props.name}</CustomText>
       </View>
 
 
