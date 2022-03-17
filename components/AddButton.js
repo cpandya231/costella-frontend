@@ -8,6 +8,7 @@ import CustomText from "./CustomText";
 
 export default function AddButton(props) {
 
+  console.log("Inside add button");
   return (
     <TouchableNativeFeedback
 
