@@ -1,6 +1,7 @@
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
+  RefreshControl,
   StyleSheet, View
 } from "react-native";
 import LineChart from "../analytics/LineChart";
@@ -18,21 +19,21 @@ import { ScrollView } from "react-native-gesture-handler";
 
 const AnalyticsDashboard = ({ route }) => {
   const [groupId, setGroupId] = useState("g_f699495c-5e96-4caf-a96b-9efd5fae7247");
-  const [selectedDate, setSelectedDate] = useState("2022-01-06");
+  const [selectedDate, setSelectedDate] = useState(formattedDate(new Date()));
   const [selectedFilter, setSelectedFilter] = useState("week");
-
-
+  const [refreshing, setRefreshing] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [analysisData, setAnalysisData] = useState({
     name: "",
     data: [],
     totalExpenses: 0,
     topSpending: [],
     selectedFilter: "week",
-    isLoading: true
+
 
   })
   useEffect(() => {
-    console.log("Inside useeffect")
+    console.log(`Getting current user ${new Date().toLocaleTimeString()}`)
 
     Auth.currentAuthenticatedUser().then(loggedInUser => {
 
@@ -46,6 +47,14 @@ const AnalyticsDashboard = ({ route }) => {
   }, []);
 
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    getGroupItems();
+
+    setTimeout(() => { setRefreshing(false) }, 2000);
+
+  }, []);
+
 
   const setFilter = (str) => {
 
@@ -56,6 +65,8 @@ const AnalyticsDashboard = ({ route }) => {
 
   const getGroupItems = async (dateObj) => {
 
+
+    console.log(`Getting GroupItems ${new Date().toLocaleTimeString()}`)
     let groupItems = await groupService.getGroupItem(groupId, selectedDate, "MONTH");
 
     const groups = groupDataByFilter();
@@ -67,6 +78,7 @@ const AnalyticsDashboard = ({ route }) => {
     let selectedItem = (groups.filter((item) => item["weekOfSelectedDate"]));
 
 
+    console.log(`Adding expenses ${new Date().toLocaleTimeString()}`);
     let totalExpenses = 0;
     groups.forEach((item, index) => totalExpenses += item["expenses"]);
 
@@ -74,10 +86,12 @@ const AnalyticsDashboard = ({ route }) => {
     analysisData["data"] = { "weeks": groups, "selectedItem": selectedItem };
     analysisData["totalExpenses"] = totalExpenses;
     analysisData["topSpending"] = top;
-    analysisData["isLoading"] = false;
 
 
-    setAnalysisData(analysisData)
+
+    console.log(`Setting analysisdata ${new Date().toLocaleTimeString()}`);
+    setAnalysisData(analysisData);
+    setLoading(false);
 
 
     function groupDataByFilter() {
@@ -93,6 +107,7 @@ const AnalyticsDashboard = ({ route }) => {
       }
 
 
+      console.log(`Grouping items ${new Date().toLocaleTimeString()}`)
       groupItems.reduce((previous, current = []) => {
 
         const week = getWeekOfMonth(current["purchaseDate"]);
@@ -105,54 +120,52 @@ const AnalyticsDashboard = ({ route }) => {
       return groups;
     }
   }
-
-
-  // const changeFilter = async (selectedStr) => {
-  //   analysisData["selectedFilter"] = selectedStr;
-  //   setAnalysisData(analysisData);
-
-  // }
-
   return (
 
     <View style={styles.container}>
-      {analysisData.isLoading ? <CustomText>Loading Dashboard...</CustomText> :
-        <>
-          {console.log(analysisData.selectedFilter)}
-          <ScrollView style={{ flex: 1 }}>
-            {console.log(JSON.stringify(analysisData))}
-            <CustomHeader>Hi {analysisData.name}!</CustomHeader>
-            <CustomText style={styles.expensesText}>Your {getMonthName(selectedDate)} expenses {'\u20B9'}{analysisData.totalExpenses}</CustomText>
-            <View style={styles.filterOptions}>
-              <AddButton name="Week"
-                style={selectedFilter.toLowerCase() == "week" ? styles.activeButton : styles.inActiveButton}
-                textStyle={selectedFilter.toLowerCase() == "week" ? styles.activeText : styles.inActiveText}
-                onPress={() => {
 
-                  setFilter("week");
-                }}
-              />
-              <AddButton name="Month"
-                style={selectedFilter.toLowerCase() == "month" ? styles.activeButton : styles.inActiveButton}
-                textStyle={selectedFilter.toLowerCase() == "month" ? styles.activeText : styles.inActiveText}
-                onPress={() => {
+      {isLoading ? <CustomText>Loading Dashboard...</CustomText> :
 
-                  setFilter("month");
-                }}
-              />
-              <AddButton name="Year"
-                style={selectedFilter.toLowerCase() == "year" ? styles.activeButton : styles.inActiveButton}
-                textStyle={selectedFilter.toLowerCase() == "year" ? styles.activeText : styles.inActiveText}
-                onPress={() =>
-                  setFilter("year")}
-              />
-            </View>
-            <LineChart data={analysisData.data} />
-            <CustomText style={{ fontSize: 20, marginLeft: 24, fontWeight: "bold" }}>Top Spending</CustomText>
-            <ListContainer data={analysisData.topSpending}></ListContainer>
-          </ScrollView>
 
-        </>
+        <ScrollView style={{ flex: 1 }} refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }>
+
+          <CustomHeader>Hi {analysisData.name}!</CustomHeader>
+          <CustomText style={styles.expensesText}>Your {getMonthName(selectedDate)} expenses {'\u20B9'}{analysisData.totalExpenses}</CustomText>
+          <View style={styles.filterOptions}>
+            <AddButton name="Week"
+              style={selectedFilter.toLowerCase() == "week" ? styles.activeButton : styles.inActiveButton}
+              textStyle={selectedFilter.toLowerCase() == "week" ? styles.activeText : styles.inActiveText}
+              onPress={() => {
+
+                setFilter("week");
+              }}
+            />
+            <AddButton name="Month"
+              style={selectedFilter.toLowerCase() == "month" ? styles.activeButton : styles.inActiveButton}
+              textStyle={selectedFilter.toLowerCase() == "month" ? styles.activeText : styles.inActiveText}
+              onPress={() => {
+
+                setFilter("month");
+              }}
+            />
+            <AddButton name="Year"
+              style={selectedFilter.toLowerCase() == "year" ? styles.activeButton : styles.inActiveButton}
+              textStyle={selectedFilter.toLowerCase() == "year" ? styles.activeText : styles.inActiveText}
+              onPress={() =>
+                setFilter("year")}
+            />
+          </View>
+          <LineChart data={analysisData.data} />
+          <CustomText style={{ fontSize: 20, marginLeft: 24, fontWeight: "bold" }}>Top Spending</CustomText>
+          <ListContainer data={analysisData.topSpending}></ListContainer>
+        </ScrollView>
+
+
       }
     </View>
   );
