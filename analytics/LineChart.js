@@ -9,7 +9,7 @@ import {
 
 export default function LineChart(props) {
 
-
+  console.log(`In chart ${JSON.stringify(props.data)}`);
 
 
   const VictoryBrushVoronoiContainer = createContainer("brush", "voronoi");
@@ -20,32 +20,32 @@ export default function LineChart(props) {
 
       <VictoryChart
         domain={{ x: [2, 5] }}
-        containerComponent={
+      // containerComponent={
 
-          <VictoryBrushVoronoiContainer
-            brushDimension="x"
-            brushDomain={getBrushDomain(props.data.selectedItem)}
-            allowDrag={false}
-            allowDraw={false}
-            allowResize={false}
-            labels={({ datum }) => `${datum.expenses}`}
-            labelComponent={
-              <VictoryTooltip dy={-7} constrainToVisibleArea />
-            }
+      //   <VictoryBrushVoronoiContainer
+      //     brushDimension="x"
+      //     brushDomain={getBrushDomain(props.data.selectedItem)}
+      //     allowDrag={false}
+      //     allowDraw={false}
+      //     allowResize={false}
+      //     labels={({ datum }) => `${datum.expenses}`}
+      //     labelComponent={
+      //       <VictoryTooltip dy={-7} constrainToVisibleArea />
+      //     }
 
-            brushStyle={{ stroke: "#11999E", strokeDasharray: "4, 8" }}
+      //     brushStyle={{ stroke: "#11999E", strokeDasharray: "4, 8" }}
 
 
-          />
+      //   />
 
-        }
+      // }
 
       >
 
         <VictoryArea
 
 
-          data={props.data.weeks} x="week" y="expenses"
+          data={props.data.groups} x="item" y="expenses"
           interpolation="natural"
           animate={{
             duration: 2000,
@@ -59,7 +59,7 @@ export default function LineChart(props) {
         <VictoryScatter
           style={{ data: { fill: "#11999E" } }}
           size={7}
-          x="week" y="expenses"
+          x="item" y="expenses"
           data={props.data.selectedItem}
 
           labels={({ datum }) => datum.expenses} />
