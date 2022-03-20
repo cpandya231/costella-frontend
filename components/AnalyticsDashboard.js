@@ -18,7 +18,7 @@ import { ScrollView } from "react-native-gesture-handler";
 
 
 const AnalyticsDashboard = ({ route }) => {
-  const [groupId, setGroupId] = useState("g_f699495c-5e96-4caf-a96b-9efd5fae7247");
+
   const [selectedDate, setSelectedDate] = useState(formattedDate(new Date()));
   const [selectedFilter, setSelectedFilter] = useState("MONTH");
   const [refreshing, setRefreshing] = useState(false);
@@ -70,7 +70,7 @@ const AnalyticsDashboard = ({ route }) => {
     let maxExpense = Number.MIN_SAFE_INTEGER;
 
     console.log(`Getting GroupItems ${new Date().toLocaleTimeString()}`)
-    let groupItems = await groupService.getGroupItem(groupId, selectedDate, filter);
+    let groupItems = await groupService.getGroupItem(selectedDate, filter);
     console.log(`Items from DB ${JSON.stringify(groupItems)}`);
     const groups = groupDataByFilter();
 

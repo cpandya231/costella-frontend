@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import * as groupService from '../services/GroupService'
 import GroupList from "./GroupList";
 import AddButton from "./AddButton";
 import { useNavigation } from '@react-navigation/native';
-import { Auth } from "aws-amplify";
 import CustomText from "./CustomText";
 import CustomHeader from "./CustomHeader";
 

@@ -9,7 +9,6 @@ import {
 
 export default function LineChart(props) {
 
-  console.log(`In chart ${JSON.stringify(props.data)}`);
   let data = props.data.data;
   let topSpending = props.data.maxExpense;
   const VictoryBrushVoronoiContainer = createContainer("brush", "voronoi");
@@ -17,8 +16,7 @@ export default function LineChart(props) {
   let startX = (selectedItemIndex - 2) >= 0 ? selectedItemIndex - 2 : 0;
   let endX = (selectedItemIndex + 2) >= 5 ? selectedItemIndex + 2 : 5;
 
-  console.log(data.selectedItem[0].itemIndex);
-  console.log(endX);
+
   return (
 
     <View style={{ marginTop: 40, position: "relative" }}>

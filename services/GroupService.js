@@ -1,7 +1,7 @@
 
 import Amplify, { Auth, Hub } from "aws-amplify";
 import * as constants from '../constants/constants';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 let url = constants.BASE_URL + 'group/';
 
 
@@ -19,7 +19,7 @@ export const getGroups = async () => {
     if (response.status == 200) {
         const groupData = await response.json();
         console.log('Group data from service ' + JSON.stringify(groupData));
-        return groupData;
+        return groupData[0];
     } else {
         console.error("Error occured " + response.status);
         return null;
@@ -52,7 +52,9 @@ export const addGroup = async (body) => {
 }
 
 
-export const getGroupItem = async (groupId, createdDate, searchBy) => {
+export const getGroupItem = async (createdDate, searchBy) => {
+    const groupId = await AsyncStorage.getItem('@group_id');
+    console.log(`Item from async storage ${groupId}`);
     const JWT_TOKEN = await getAccessJwtToken();
     let itemUrl = `${url}item/${groupId}?createdDate=${createdDate}&searchBy=${searchBy}`;
 
