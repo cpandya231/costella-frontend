@@ -13,13 +13,19 @@ export default function LineChart(props) {
   let data = props.data.data;
   let topSpending = props.data.maxExpense;
   const VictoryBrushVoronoiContainer = createContainer("brush", "voronoi");
+  let selectedItemIndex = data.selectedItem[0].itemIndex;
+  let startX = (selectedItemIndex - 2) >= 0 ? selectedItemIndex - 2 : 0;
+  let endX = (selectedItemIndex + 2) >= 5 ? selectedItemIndex + 2 : 5;
 
+  console.log(data.selectedItem[0].itemIndex);
+  console.log(endX);
   return (
+
     <View style={{ marginTop: 40, position: "relative" }}>
 
 
       <VictoryChart
-        domain={{ x: [1, 5], y: [0, topSpending * (1.10)] }}
+        domain={{ x: [startX, endX], y: [0, topSpending * (1.10)] }}
         containerComponent={
 
           <VictoryBrushVoronoiContainer
@@ -102,7 +108,7 @@ const styles = StyleSheet.create({
 
 function getBrushDomain(selectedItem) {
 
-  let itemIndex = parseInt(selectedItem[0].itemIndex) + 1;
+  let itemIndex = parseInt(selectedItem[0].itemIndex);
 
   return { x: [itemIndex, itemIndex + 0.01], y: [0, selectedItem[0].expenses] }
 }

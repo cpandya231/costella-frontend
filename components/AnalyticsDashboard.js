@@ -122,8 +122,8 @@ const AnalyticsDashboard = ({ route }) => {
 
         let weekOfSelectedDate = getWeek(selectedDate);
         for (let i = 0; i < 6; i++) {
-          let week = `Week ${i}`;
-          let initialItem = { "item": week, "expenses": 0, "selectedItem": false, "itemIndex": i };
+          let week = `Week ${i + 1}`;
+          let initialItem = { "item": week, "expenses": 0, "selectedItem": false, "itemIndex": i + 1 };
           if (week == weekOfSelectedDate) {
             initialItem["selectedItem"] = true;
           }
@@ -150,7 +150,7 @@ const AnalyticsDashboard = ({ route }) => {
 
         for (let [i, month] of months.entries()) {
 
-          let initialItem = { "item": month, "expenses": 0, "selectedItem": false, "itemIndex": i };
+          let initialItem = { "item": month, "expenses": 0, "selectedItem": false, "itemIndex": i + 1 };
           if (month == selectedMonth) {
             initialItem["selectedItem"] = true;
           }
