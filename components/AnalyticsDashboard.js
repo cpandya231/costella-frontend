@@ -27,7 +27,8 @@ const AnalyticsDashboard = ({ route }) => {
     name: "",
     data: [],
     totalExpenses: 0,
-    topSpending: []
+    topSpending: [],
+    maxExpense: 0
 
 
   })
@@ -48,7 +49,7 @@ const AnalyticsDashboard = ({ route }) => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    getGroupItems();
+    getGroupItems(selectedFilter);
 
     setTimeout(() => { setRefreshing(false) }, 2000);
 
@@ -66,6 +67,7 @@ const AnalyticsDashboard = ({ route }) => {
 
   const getGroupItems = async (filter) => {
 
+    let maxExpense = Number.MIN_SAFE_INTEGER;
 
     console.log(`Getting GroupItems ${new Date().toLocaleTimeString()}`)
     let groupItems = await groupService.getGroupItem(groupId, selectedDate, filter);
@@ -87,7 +89,7 @@ const AnalyticsDashboard = ({ route }) => {
     analysisData["data"] = { "groups": groups, "selectedItem": selectedItem };
     analysisData["totalExpenses"] = totalExpenses;
     analysisData["topSpending"] = top;
-
+    analysisData["maxExpense"] = maxExpense;
 
 
     console.log(`Setting analysisdata ${new Date().toLocaleTimeString()}`);
@@ -117,10 +119,11 @@ const AnalyticsDashboard = ({ route }) => {
       return groups;
 
       function groupByWeek() {
+
         let weekOfSelectedDate = getWeek(selectedDate);
         for (let i = 0; i < 6; i++) {
           let week = `Week ${i}`;
-          let initialItem = { "item": week, "expenses": 0, "selectedItem": false };
+          let initialItem = { "item": week, "expenses": 0, "selectedItem": false, "itemIndex": i };
           if (week == weekOfSelectedDate) {
             initialItem["selectedItem"] = true;
           }
@@ -132,7 +135,9 @@ const AnalyticsDashboard = ({ route }) => {
           const week = getWeek(current["purchaseDate"]);
           let aggrgatedItem = previous.filter((itemToFilter) => itemToFilter["item"] == week)[0];
           aggrgatedItem["expenses"] = aggrgatedItem["expenses"] + parseFloat(current["amount"]);
-
+          if (aggrgatedItem["expenses"] > maxExpense) {
+            maxExpense = aggrgatedItem["expenses"];
+          }
           return previous;
 
         }, groups);
@@ -143,8 +148,9 @@ const AnalyticsDashboard = ({ route }) => {
         let selectedMonth = getMonthName(selectedDate);
         let months = moment.months();
 
-        for (let month of months) {
-          let initialItem = { "item": month, "expenses": 0, "selectedItem": false };
+        for (let [i, month] of months.entries()) {
+
+          let initialItem = { "item": month, "expenses": 0, "selectedItem": false, "itemIndex": i };
           if (month == selectedMonth) {
             initialItem["selectedItem"] = true;
           }
@@ -160,6 +166,9 @@ const AnalyticsDashboard = ({ route }) => {
           let aggrgatedItem = previous.filter((itemToFilter) => itemToFilter["item"] == month)[0];
           aggrgatedItem["expenses"] = aggrgatedItem["expenses"] + parseFloat(current["amount"]);
 
+          if (aggrgatedItem["expenses"] > maxExpense) {
+            maxExpense = aggrgatedItem["expenses"];
+          }
           return previous;
 
         }, groups);
@@ -206,7 +215,7 @@ const AnalyticsDashboard = ({ route }) => {
                 setFilter("year")}
             /> */}
           </View>
-          <LineChart data={analysisData.data} />
+          <LineChart data={analysisData} />
           <CustomText style={{ fontSize: 20, marginLeft: 24, fontWeight: "bold" }}>Top Spending</CustomText>
           <ListContainer data={analysisData.topSpending}></ListContainer>
         </ScrollView>
@@ -261,9 +270,12 @@ function formattedDate(date) {
 
 function getWeek(dateStr) {
   let date = new Date(dateStr);
-  let adjustedDate = date.getDate() + date.getDay();
+  let adjustedDate = date.getDate();
+
   let prefixes = ['0', '1', '2', '3', '4', '5'];
-  return "Week " + (parseInt(prefixes[0 | adjustedDate / 7]) + 1);
+  let finalWeek = "Week " + (parseInt(prefixes[0 | adjustedDate / 7]) + 1);;
+
+  return finalWeek;
 }
 
 

@@ -10,8 +10,8 @@ import {
 export default function LineChart(props) {
 
   console.log(`In chart ${JSON.stringify(props.data)}`);
-
-
+  let data = props.data.data;
+  let topSpending = props.data.maxExpense;
   const VictoryBrushVoronoiContainer = createContainer("brush", "voronoi");
 
   return (
@@ -19,33 +19,33 @@ export default function LineChart(props) {
 
 
       <VictoryChart
-        domain={{ x: [2, 5] }}
-      // containerComponent={
+        domain={{ x: [1, 5], y: [0, topSpending * (1.10)] }}
+        containerComponent={
 
-      //   <VictoryBrushVoronoiContainer
-      //     brushDimension="x"
-      //     brushDomain={getBrushDomain(props.data.selectedItem)}
-      //     allowDrag={false}
-      //     allowDraw={false}
-      //     allowResize={false}
-      //     labels={({ datum }) => `${datum.expenses}`}
-      //     labelComponent={
-      //       <VictoryTooltip dy={-7} constrainToVisibleArea />
-      //     }
+          <VictoryBrushVoronoiContainer
+            brushDimension="x"
+            brushDomain={getBrushDomain(data.selectedItem)}
+            allowDrag={false}
+            allowDraw={false}
+            allowResize={false}
+            labels={({ datum }) => `${datum.expenses}`}
+            labelComponent={
+              <VictoryTooltip dy={-7} constrainToVisibleArea />
+            }
 
-      //     brushStyle={{ stroke: "#11999E", strokeDasharray: "4, 8" }}
+            brushStyle={{ stroke: "#11999E", strokeDasharray: "4, 8" }}
 
 
-      //   />
+          />
 
-      // }
+        }
 
       >
 
         <VictoryArea
 
 
-          data={props.data.groups} x="item" y="expenses"
+          data={data.groups} x="item" y="expenses"
           interpolation="natural"
           animate={{
             duration: 2000,
@@ -60,7 +60,7 @@ export default function LineChart(props) {
           style={{ data: { fill: "#11999E" } }}
           size={7}
           x="item" y="expenses"
-          data={props.data.selectedItem}
+          data={data.selectedItem}
 
           labels={({ datum }) => datum.expenses} />
 
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
 
 function getBrushDomain(selectedItem) {
 
-  let week = parseInt(selectedItem[0].week.split(" ")[1]) + 1;
+  let itemIndex = parseInt(selectedItem[0].itemIndex) + 1;
 
-  return { x: [week, week + 0.01], y: [0, selectedItem[0].expenses] }
+  return { x: [itemIndex, itemIndex + 0.01], y: [0, selectedItem[0].expenses] }
 }
