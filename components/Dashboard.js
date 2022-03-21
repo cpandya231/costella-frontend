@@ -16,8 +16,8 @@ import { format } from 'date-fns'
 
 const Dashboard = ({ route }) => {
   let navigation = useNavigation();
-  const { groupName, groupId } = route.params;
-  const [data, setData] = useState(route.params.groupItems);
+  console.log(JSON.stringify(route));
+  const [data, setData] = useState(route.params != undefined ? route.params.groupItems : []);
   const [isLoading, setLoading] = useState(true);
 
 
@@ -52,7 +52,7 @@ const Dashboard = ({ route }) => {
 
   const addExpense = () => {
 
-    navigation.navigate("AddExpenseForm", { groupId, groupName, "groupItems": data });
+    navigation.navigate("AddExpenseForm", { "groupItems": data });
 
   }
 
@@ -61,7 +61,7 @@ const Dashboard = ({ route }) => {
     <>
       {isLoading ? <CustomText>Loading items...</CustomText> :
         <View style={styles.container}>
-          <CustomHeader>{groupName}</CustomHeader>
+          <CustomHeader>Your expenses</CustomHeader>
 
           <CustomCalenderStrip dateObj={dateObj} changeDate={changeDate} />
           <ListContainer data={filteredData(data, dateObj)} />

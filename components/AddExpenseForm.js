@@ -11,12 +11,12 @@ import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { format } from 'date-fns'
 import GeneralStyles from "../styles/GeneralStyles";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function AddExpenseForm({ route }) {
     let navigation = useNavigation();
-    const { groupName, groupId } = route.params;
+
     const [selectedCategory, setSelectedCategory] = useState("Grocery");
     const [date, setDate] = useState(new Date(Date.now()));
     const [show, setShow] = useState(false);
@@ -30,13 +30,14 @@ export default function AddExpenseForm({ route }) {
     });
     const onSubmit = async (data) => {
 
+        const groupId = await AsyncStorage.getItem('@group_id');
+        data["groupId"] = groupId;
         console.log(data);
-        data["groupId"] = route.params.groupId;
 
         let addItemResponse = await groupService.addGroupItem(data);
         let groupItems = route.params.groupItems;
         groupItems.push(data);
-        navigation.navigate("Dashboard", { groupId, groupName, "groupItems": groupItems });
+        navigation.navigate("Dashboard", { "groupItems": groupItems });
 
     }
 

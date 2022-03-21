@@ -64,9 +64,9 @@ const TabNavigator = () => {
                   : 'home-outline';
               } else if (route.name === 'Settings') {
                 iconName = focused ? 'settings-sharp' : 'settings-outline';
-                color = focused ? 'tomato' : 'gray';
-              } else if (route.name === 'Dashboard') {
-                iconName = focused ? 'analytics-sharp' : 'analytics-outline';
+
+              } else if (route.name === 'Transactions') {
+                iconName = focused ? 'md-cash-sharp' : 'md-cash-outline';
 
               }
 
@@ -79,7 +79,7 @@ const TabNavigator = () => {
           })}
         >
           <Tab.Screen name="Home" component={DashboardStackkNavigator} />
-          {/* <Tab.Screen name="Dashboard" component={DashboardStackkNavigator} /> */}
+          <Tab.Screen name="Transactions" component={GroupStackNavigator} />
           <Tab.Screen name="Settings" component={Settings} />
         </Tab.Navigator>
       }

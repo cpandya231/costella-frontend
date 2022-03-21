@@ -78,6 +78,7 @@ export const getGroupItem = async (createdDate, searchBy) => {
 }
 
 export const addGroupItem = async (body) => {
+   
     console.log("Adding item to using " + JSON.stringify(body));
     const JWT_TOKEN = await getAccessJwtToken();
     let itemUrl = url + 'item';
