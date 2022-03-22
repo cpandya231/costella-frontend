@@ -2,23 +2,23 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import GroupStackNavigator from './GroupStackNavigator';
 import DashboardStackkNavigator from './DashboardStackkNavigator';
 import Settings from "../components/Settings"
+import AddExpenseButton from "../components/AddExpenseButton"
 import { Ionicons } from '@expo/vector-icons';
 import * as groupService from '../services/GroupService'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import CustomText from '../components/CustomText';
+import { Image, TouchableNativeFeedback } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 
 
 const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
 
-
+  let navigation = useNavigation();
 
   const [isLoading, setLoading] = useState(true);
-
-
-
-
 
   useEffect(() => {
     getData();
@@ -29,7 +29,7 @@ const TabNavigator = () => {
     try {
 
       const value = await AsyncStorage.getItem('@group_id');
-      console.log(`Item from async storage ${value}`);
+
 
       if (value !== null) {
         // value previously stored
@@ -43,6 +43,12 @@ const TabNavigator = () => {
     } catch (e) {
       console.log(`Error occured ${e}`);
     }
+  }
+
+  const addExpense = () => {
+
+    navigation.navigate("AddExpenseForm");
+
   }
 
 
@@ -79,8 +85,20 @@ const TabNavigator = () => {
           })}
         >
           <Tab.Screen name="Home" component={DashboardStackkNavigator} />
+          <Tab.Screen name="AddExpenseButton" component={AddExpenseButton} options={{
+            tabBarButton: () => {
+              return (
+                <TouchableNativeFeedback onPress={() => addExpense()}>
+                  <Image style={{ height: 50, width: 50, bottom: 30 }} source={require("../assets/icons8-add-100.png")}
+                  />
+                </TouchableNativeFeedback>
+              )
+            }
+          }
+          } />
           <Tab.Screen name="Transactions" component={GroupStackNavigator} />
-          <Tab.Screen name="Settings" component={Settings} />
+
+          {/* <Tab.Screen name="Settings" component={Settings} /> */}
         </Tab.Navigator>
       }
     </>

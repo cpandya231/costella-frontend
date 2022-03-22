@@ -54,7 +54,7 @@ export const addGroup = async (body) => {
 
 export const getGroupItem = async (createdDate, searchBy) => {
     const groupId = await AsyncStorage.getItem('@group_id');
-    console.log(`Item from async storage ${groupId}`);
+
     const JWT_TOKEN = await getAccessJwtToken();
     let itemUrl = `${url}item/${groupId}?createdDate=${createdDate}&searchBy=${searchBy}`;
 
@@ -78,7 +78,7 @@ export const getGroupItem = async (createdDate, searchBy) => {
 }
 
 export const addGroupItem = async (body) => {
-   
+
     console.log("Adding item to using " + JSON.stringify(body));
     const JWT_TOKEN = await getAccessJwtToken();
     let itemUrl = url + 'item';

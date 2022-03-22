@@ -1,6 +1,6 @@
 import {
   StyleSheet,
-  View
+  View, Image
 } from "react-native";
 import ListContainer from "./ListContainer";
 import AddButton from "./AddButton";
@@ -16,7 +16,7 @@ import { format } from 'date-fns'
 
 const Dashboard = ({ route }) => {
   let navigation = useNavigation();
-  console.log(JSON.stringify(route));
+
   const [data, setData] = useState(route.params != undefined ? route.params.groupItems : []);
   const [isLoading, setLoading] = useState(true);
 
@@ -64,7 +64,13 @@ const Dashboard = ({ route }) => {
           <CustomHeader>Your expenses</CustomHeader>
 
           <CustomCalenderStrip dateObj={dateObj} changeDate={changeDate} />
-          <ListContainer data={filteredData(data, dateObj)} />
+          {filteredData(data, dateObj).length == 0 ? <View style={{ flex: 5, alignItems: "center", padding: 50 }}>
+            <Image source={require("../assets/Businesswoman-thinking.png")}
+              style={{ height: 274, width: 272 }} />
+            <CustomText style={{ textAlign: "center", fontSize: 16 }}>No expense found, add your first expense for the day </CustomText>
+          </View> :
+            <ListContainer data={filteredData(data, dateObj)} />}
+
           <AddButton onPress={() => addExpense()} name="Add Expense" style={{
             position: "absolute",
             right: 26,

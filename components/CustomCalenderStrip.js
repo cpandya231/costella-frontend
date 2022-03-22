@@ -10,7 +10,7 @@ export default function CustomCalenderStrip(props) {
     const [currentMonth, setCurrentMonth] = useState(props.dateObj.currentMonth)
     console.log(`In CustomCalendarStrip currentMonth: ${props.dateObj.selectedDateString}`)
     return (
-        <>
+        <View style={styles.container}>
             {/* <TouchableNativeFeedback onPress={() => setShow(true)}>
                 <View style={{ alignItems: "center", marginTop: 15 }} >
                 <CustomText style={{ fontWeight: "bold" }}>{currentMonth}</CustomText>
@@ -54,7 +54,7 @@ export default function CustomCalenderStrip(props) {
                     selectedDate={props.dateObj.selectedDateString}
                     onHeaderSelected={(event) => setShow(true)}
                     calendarHeaderStyle={{ fontWeight: "bold" }}
-                
+
                     maxDate={formattedDate(new Date(Date.now()))}
                     onDateSelected={(itemValue) => {
                         console.log(`Selected date ${formattedDate(new Date(itemValue))}`);
@@ -73,12 +73,12 @@ export default function CustomCalenderStrip(props) {
 
                 />
             </View>
-        </>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1 }
+    container: { flex: 1, marginTop: 10 }
 });
 
 function formattedDate(date) {

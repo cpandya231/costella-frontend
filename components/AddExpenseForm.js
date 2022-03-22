@@ -35,9 +35,15 @@ export default function AddExpenseForm({ route }) {
         console.log(data);
 
         let addItemResponse = await groupService.addGroupItem(data);
-        let groupItems = route.params.groupItems;
-        groupItems.push(data);
-        navigation.navigate("Dashboard", { "groupItems": groupItems });
+        if (route.params != undefined) {
+            let groupItems = route.params.groupItems;
+            groupItems.push(data);
+
+        } else {
+            navigation.navigate("Dashboard");
+        }
+
+
 
     }
 
