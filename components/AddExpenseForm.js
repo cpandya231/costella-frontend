@@ -40,7 +40,7 @@ export default function AddExpenseForm({ route }) {
             groupItems.push(data);
 
         } else {
-            navigation.navigate("Dashboard");
+            navigation.navigate("Transactions");
         }
 
 

@@ -72,7 +72,7 @@ const AnalyticsDashboard = ({ route }) => {
 
     console.log(`Getting GroupItems ${new Date().toLocaleTimeString()}`)
     let groupItems = await groupService.getGroupItem(selectedDate, filter);
-    groupItems = []
+
     if (groupItems.length == 0) {
       setLoading(false);
       return;

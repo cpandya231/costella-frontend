@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import GroupStackNavigator from './GroupStackNavigator';
 import DashboardStackkNavigator from './DashboardStackkNavigator';
-import Settings from "../components/Settings"
+import Dashboard from "../components/Dashboard";
+import AddExpenseForm from "../components/AddExpenseForm";
 import AddExpenseButton from "../components/AddExpenseButton"
 import { Ionicons } from '@expo/vector-icons';
 import * as groupService from '../services/GroupService'
@@ -88,15 +88,21 @@ const TabNavigator = () => {
           <Tab.Screen name="AddExpenseButton" component={AddExpenseButton} options={{
             tabBarButton: () => {
               return (
-                <TouchableNativeFeedback onPress={() => addExpense()}>
-                  <Image style={{ height: 50, width: 50, bottom: 30 }} source={require("../assets/icons8-add-100.png")}
+                <TouchableNativeFeedback onPress={() => addExpense()}
+                >
+                  <Image style={{ height: 50, width: 50, bottom: 30, }} source={require("../assets/icons8-add-100.png")}
                   />
                 </TouchableNativeFeedback>
               )
             }
           }
           } />
-          <Tab.Screen name="Transactions" component={GroupStackNavigator} />
+          <Tab.Screen name="Transactions" component={Dashboard} />
+          <Tab.Screen name="AddExpenseForm" component={AddExpenseForm} options={{
+            tabBarButton: () => null,
+            tabBarVisible: false //hide tab bar on this screen
+
+          }} />
 
           {/* <Tab.Screen name="Settings" component={Settings} /> */}
         </Tab.Navigator>
