@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import TabNavigator from "./TabNavigator";
+import DrawerNavigator from "./DrawerNavigator";
 import Welcome from "../components/Welcome";
 import Login from "../components/Login";
 import SplashScreenStackNavigator from "./SplashScreenStackNavigator";
@@ -14,7 +14,7 @@ const MainStackNavigator = () => {
 
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="SplashScreenNavigator" component={SplashScreenStackNavigator} />
-        <Stack.Screen name="TabNavigator" component={TabNavigator} />
+        <Stack.Screen name="DrawerNavigator" component={DrawerNavigator} />
     </Stack.Navigator>)
 }
 

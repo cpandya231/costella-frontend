@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Text } from "react-native";
@@ -10,6 +11,7 @@ import CustomText from "./components/CustomText";
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { LogBox } from 'react-native';
+
 
 LogBox.ignoreAllLogs(true);
 
@@ -46,12 +48,15 @@ Amplify.configure({
 
 const config = {
   screens: {
-    TabNavigator: {
+    DrawerNavigator: {
+      TabNavigator: {
 
-      screens: {
-        Group: "loginCallback",
+        screens: {
+          Home: "loginCallback",
+        }
       }
     },
+
     SplashScreenNavigator: {
 
       screens: {

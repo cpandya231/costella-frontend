@@ -9,7 +9,7 @@ export default function Login({ navigation }) {
 
   React.useEffect(() => {
     Auth.currentAuthenticatedUser().then(loggedInUser => {
-      navigation.navigate("TabNavigator");
+      navigation.navigate("DrawerNavigator");
     }).catch(err => {
       console.log("User has not logged in")
     });

@@ -15,7 +15,7 @@ export default function Welcome({ navigation }) {
 
   function navigateBasedOnAuthentication() {
     Auth.currentAuthenticatedUser().then(loggedInUser => {
-      navigation.navigate("TabNavigator");
+      navigation.navigate("DrawerNavigator");
     }).catch(err => {
       console.log("User has not logged in");
       navigation.navigate("SplashScreenNavigator");
