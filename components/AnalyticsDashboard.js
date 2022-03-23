@@ -50,7 +50,7 @@ const AnalyticsDashboard = ({ route }) => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    getGroupItems(selectedFilter);
+    getGroupItems("MONTH");
 
     setTimeout(() => { setRefreshing(false) }, 2000);
 
@@ -74,6 +74,11 @@ const AnalyticsDashboard = ({ route }) => {
     let groupItems = await groupService.getGroupItem(selectedDate, filter);
 
     if (groupItems.length == 0) {
+      analysisData["data"] = [];
+      analysisData["totalExpenses"] = 0;
+      analysisData["topSpending"] = 0;
+      analysisData["maxExpense"] = 0;
+      setAnalysisData(analysisData);
       setLoading(false);
       return;
     }
@@ -197,11 +202,11 @@ const AnalyticsDashboard = ({ route }) => {
         }>
 
           <CustomHeader>Hi {analysisData.name}!</CustomHeader>
-          <CustomText style={styles.expensesText}>Your {getMonthName(selectedDate)} expenses {'\u20B9'}{analysisData.totalExpenses}</CustomText>
+          <CustomText style={styles.expensesText}>Your {selectedFilter.toUpperCase() == "MONTH" ? getMonthName(selectedDate) : 'Total'} expenses {'\u20B9'}{analysisData.totalExpenses}</CustomText>
           {analysisData.data.length == 0 ? <View style={{ flex: 5, alignItems: "center", padding: 50 }}>
             <Image source={require("../assets/No-data-for-analytics.png")}
-              style={{ height: 274, width: 272 }} />
-            <CustomText style={{ textAlign: "center", fontSize: 16 }}>No expense found, add your first expense for the day </CustomText>
+              style={{ height: 400, width: 400 }} />
+            <CustomText style={{ textAlign: "center", fontSize: 18 }}>New to Costella? Start by adding your first expense </CustomText>
           </View> :
             <View>
               <View style={styles.filterOptions}>
@@ -237,7 +242,7 @@ const AnalyticsDashboard = ({ route }) => {
 
 
       }
-    </View>
+    </View >
   );
 };
 

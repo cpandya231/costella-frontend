@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import DashboardStackkNavigator from './DashboardStackkNavigator';
 import Dashboard from "../components/Dashboard";
+import Settings from "../components/Settings";
 import AddExpenseForm from "../components/AddExpenseForm";
 import AddExpenseButton from "../components/AddExpenseButton"
 import { Ionicons } from '@expo/vector-icons';
@@ -81,6 +82,8 @@ const TabNavigator = () => {
             },
 
             tabBarInactiveTintColor: 'gray',
+            tabBarActiveTintColor: '#11999E',
+
             headerShown: false,
           })}
         >
@@ -90,7 +93,7 @@ const TabNavigator = () => {
               return (
                 <TouchableNativeFeedback onPress={() => addExpense()}
                 >
-                  <Image style={{ height: 50, width: 50, bottom: 30, }} source={require("../assets/icons8-add-100.png")}
+                  <Image style={{ height: 60, width: 60, bottom: 30 }} source={require("../assets/add-button-orange.png")}
                   />
                 </TouchableNativeFeedback>
               )
@@ -104,7 +107,7 @@ const TabNavigator = () => {
 
           }} />
 
-          {/* <Tab.Screen name="Settings" component={Settings} /> */}
+          <Tab.Screen name="Settings" component={Settings} />
         </Tab.Navigator>
       }
     </>

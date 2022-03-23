@@ -71,12 +71,6 @@ const Dashboard = ({ route }) => {
           </View> :
             <ListContainer data={filteredData(data, dateObj)} />}
 
-          <AddButton onPress={() => addExpense()} name="Add Expense" style={{
-            position: "absolute",
-            right: 26,
-            bottom: 33
-          }}></AddButton>
-
 
         </View>
       }

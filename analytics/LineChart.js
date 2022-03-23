@@ -13,8 +13,8 @@ export default function LineChart(props) {
   let topSpending = props.data.maxExpense;
   const VictoryBrushVoronoiContainer = createContainer("brush", "voronoi");
   let selectedItemIndex = data.selectedItem[0].itemIndex;
-  let startX = (selectedItemIndex - 2) >= 0 ? selectedItemIndex - 2 : 0;
-  let endX = (selectedItemIndex + 2) >= 5 ? selectedItemIndex + 2 : 5;
+  let startX = (selectedItemIndex - 3) > 0 ? selectedItemIndex - 3 : 1;
+  let endX = selectedItemIndex % 5
 
 
   return (
@@ -61,8 +61,13 @@ export default function LineChart(props) {
         />
 
         <VictoryScatter
-          style={{ data: { fill: "#11999E" } }}
-          size={7}
+          style={{
+            data: {
+              fill: "#11999E", stroke: "rgba(196,196,196,0.4)",
+              strokeWidth: 10
+            }
+          }}
+          size={8}
           x="item" y="expenses"
           data={data.selectedItem}
 
