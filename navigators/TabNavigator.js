@@ -107,7 +107,7 @@ const TabNavigator = () => {
 
           }} />
 
-          <Tab.Screen name="Settings" component={Settings} />
+
         </Tab.Navigator>
       }
     </>

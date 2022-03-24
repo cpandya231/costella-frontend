@@ -49,12 +49,18 @@ Amplify.configure({
 const config = {
   screens: {
     DrawerNavigator: {
-      TabNavigator: {
-
-        screens: {
-          Home: "loginCallback",
+      screens: {
+        TabNavigator: {
+          screens: {
+            Home: {
+              screens: {
+                AnalyticsDashboard: "loginCallback",
+              }
+            }
+          }
         }
       }
+
     },
 
     SplashScreenNavigator: {
