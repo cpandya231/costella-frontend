@@ -31,7 +31,6 @@ const Dashboard = ({ route }) => {
 
 
   useEffect(() => {
-
     getGroupItems(dateObj);
   }, []);
 

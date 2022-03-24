@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
 
   },
   expensesText: {
-    textAlign: "center",
+    marginLeft: 24,
     fontSize: 20,
     marginTop: 20,
   },

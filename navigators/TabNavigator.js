@@ -9,7 +9,7 @@ import * as groupService from '../services/GroupService'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import CustomText from '../components/CustomText';
-import { Image, TouchableNativeFeedback } from 'react-native';
+import { Button, Image, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -18,6 +18,8 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
 
   let navigation = useNavigation();
+
+
 
   const [isLoading, setLoading] = useState(true);
 
@@ -83,8 +85,10 @@ const TabNavigator = () => {
 
             tabBarInactiveTintColor: 'gray',
             tabBarActiveTintColor: '#11999E',
-
             headerShown: false,
+
+
+
           })}
         >
           <Tab.Screen name="Home" component={DashboardStackkNavigator} />
@@ -93,7 +97,7 @@ const TabNavigator = () => {
               return (
                 <TouchableNativeFeedback onPress={() => addExpense()}
                 >
-                  <Image style={{ height: 60, width: 60, bottom: 30 }} source={require("../assets/add-button-orange.png")}
+                  <Image style={{ height: 60, width: 60, bottom: 10 }} source={require("../assets/add-button-orange.png")}
                   />
                 </TouchableNativeFeedback>
               )
