@@ -5,8 +5,8 @@ import {
 import ListContainer from "./ListContainer";
 import AddButton from "./AddButton";
 
-import { useNavigation } from '@react-navigation/native';
-import { useState, useEffect } from "react";
+import { useNavigation, useIsFocused, useFocusEffect } from '@react-navigation/native';
+import { useState, useEffect, useCallback } from "react";
 import * as groupService from "../services/GroupService"
 import CustomText from "./CustomText";
 import CustomHeader from "./CustomHeader";
@@ -15,6 +15,7 @@ import CustomCalenderStrip from "./CustomCalenderStrip";
 import { format } from 'date-fns'
 
 const Dashboard = ({ route }) => {
+  console.log(`Route ${JSON.stringify(route)}`)
   let navigation = useNavigation();
 
   const [data, setData] = useState(route.params != undefined ? route.params.groupItems : []);
@@ -30,23 +31,27 @@ const Dashboard = ({ route }) => {
   })
 
 
-  useEffect(() => {
-    getGroupItems(dateObj);
-  }, []);
+  // useEffect(() => {
+  //   console.log("Inside useEffect dashboard");
+  //   getGroupItems();
+  // }, []);
 
 
-  const changeDate = (dateObj) => {
-    console.log(`Inside change date ${JSON.stringify(dateObj)}`)
-    getGroupItems(dateObj);
+  const changeDate = (changedDateObj) => {
+    console.log(`Inside change date ${JSON.stringify(changedDateObj)}`);
+    getGroupItems(changedDateObj);
 
   }
 
-  const getGroupItems = async (dateObj) => {
+  const getGroupItems = async (changedDateObj) => {
 
-    let groupItems = await groupService.getGroupItem(dateObj.selectedDateString, "DATE");
+    if (changedDateObj == undefined) {
+      changedDateObj = dateObj;
+    }
+    let groupItems = await groupService.getGroupItem(changedDateObj.selectedDateString, "DATE");
     setData(groupItems);
     setLoading(false);
-    setDateObj(dateObj);
+    setDateObj(changedDateObj);
   }
 
   const addExpense = () => {
@@ -54,6 +59,12 @@ const Dashboard = ({ route }) => {
     navigation.navigate("AddExpenseForm", { "groupItems": data });
 
   }
+
+  useFocusEffect(
+    useCallback(() => {
+      console.log("useFocusEffect")
+      getGroupItems();
+    }, []));
 
   return (
 

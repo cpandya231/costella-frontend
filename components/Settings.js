@@ -29,9 +29,10 @@ export default function Settings() {
 
   return (<View style={styles.container}>
     {isLoading ? <CustomText></CustomText> : <View style={styles.container}>
-      <View style={{}}>
-        <View style={{ backgroundColor: "#C4C4C4", borderRadius: 50, height: 74, width: 74, alignSelf: "center", justifyContent: "center" }}>
-          <CustomText style={styles.text}>{profile.name.charAt(0)}</CustomText>
+      <View>
+        <View style={{ backgroundColor: "#C4C4C4", borderRadius: 50, height: 74, width: 74, alignSelf: "center", alignItems: "center", justifyContent: "center" }}>
+          <Image source={require("../assets/User.png")}
+          />
         </View>
         <CustomText style={styles.text}>{profile.name}</CustomText>
       </View>
@@ -42,7 +43,7 @@ export default function Settings() {
             style={{ height: 33, width: 38 }} />
           <View style={{ flexDirection: "row", alignItems: "center", height: 33, width: "90%", justifyContent: "space-between" }}>
             <CustomText style={{ color: "red", textAlign: "center" }}>Logout</CustomText>
-            <Arrow />
+            {/* <Arrow /> */}
           </View>
 
         </View>
@@ -68,13 +69,14 @@ const styles = StyleSheet.create({
   logoutButton: {
     marginTop: 41,
     flexDirection: "row",
-    borderWidth: 1,
-    elevation: 5,
-    borderRadius: 20,
+
+    // borderWidth: 1,
+    // elevation: 5,
+    borderRadius: 5,
     backgroundColor: "#fff",
-    alignSelf: "baseline",
+    alignSelf: "center",
     padding: 10,
-    borderColor: `red`
+    // borderColor: `red`
 
   }
 });

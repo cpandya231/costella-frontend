@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { useCallback, useEffect, useState } from "react";
+import { useFocusEffect } from '@react-navigation/native';
 import {
   Image,
   RefreshControl,
@@ -32,8 +33,10 @@ const AnalyticsDashboard = ({ route }) => {
     maxExpense: 0
 
 
-  })
+  });
+
   useEffect(() => {
+
     console.log(`Getting current user ${new Date().toLocaleTimeString()}`)
 
     Auth.currentAuthenticatedUser().then(loggedInUser => {
@@ -42,10 +45,17 @@ const AnalyticsDashboard = ({ route }) => {
     }).catch(err => {
       console.log("User has not logged in")
     })
-
-    getGroupItems(selectedFilter);
+    // getGroupItems(selectedFilter);
 
   }, []);
+
+  useFocusEffect(
+
+    useCallback(() => {
+      setLoading(true);
+      getGroupItems(selectedFilter);
+
+    }, [analysisData]));
 
 
   const onRefresh = useCallback(() => {

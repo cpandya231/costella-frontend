@@ -5,11 +5,11 @@ import { Auth } from "aws-amplify";
 
 export default function Welcome({ navigation }) {
   React.useEffect(() => {
-    setTimeout(() => navigateBasedOnAuthentication(), 2000);
+    setTimeout(() => navigateBasedOnAuthentication());
   }, [navigation]);
   return (
     <View style={styles.container}>
-      <CustomText style={styles.text}>Costella</CustomText>
+      {/* <CustomText style={styles.text}>Costella</CustomText> */}
     </View>
   );
 
