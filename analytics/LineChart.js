@@ -14,7 +14,7 @@ export default function LineChart(props) {
   const VictoryBrushVoronoiContainer = createContainer("brush", "voronoi");
   let selectedItemIndex = data.selectedItem[0].itemIndex;
   let startX = (selectedItemIndex - 3) > 0 ? selectedItemIndex - 3 : 1;
-  let endX = selectedItemIndex % 5
+  let endX = selectedItemIndex
 
 
   return (
@@ -32,9 +32,12 @@ export default function LineChart(props) {
             allowDrag={false}
             allowDraw={false}
             allowResize={false}
-            labels={({ datum }) => `${datum.expenses}`}
+            labels={({ datum }) => {
+              return datum.continuous != null ? `\u20B9 ${datum.expenses}` : null;
+            }}
+
             labelComponent={
-              <VictoryTooltip dy={-7} constrainToVisibleArea />
+              <VictoryTooltip dy={-17} constrainToVisibleArea />
             }
 
             brushStyle={{ stroke: "#11999E", strokeDasharray: "4, 8" }}
@@ -71,7 +74,7 @@ export default function LineChart(props) {
           x="item" y="expenses"
           data={data.selectedItem}
 
-          labels={({ datum }) => datum.expenses} />
+          labels={({ datum }) => ` \u20B9 ${datum.expenses}`} />
 
 
 
@@ -89,7 +92,7 @@ export default function LineChart(props) {
           fixLabelOverlap={true}
         />
       </VictoryChart>
-    </View>
+    </View >
   );
 }
 
